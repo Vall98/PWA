@@ -13,6 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -51,7 +52,8 @@ import { SignupComponent } from './signup/signup.component';
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

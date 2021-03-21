@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
-import { SignupComponent } from '../signup/signup.component';
+import { SigninComponent } from '../signin/signin.component';
 
 @Component({
   selector: 'app-navbar',
@@ -13,8 +13,7 @@ export class NavbarComponent {
   constructor(public userService: UserService, public dialog: MatDialog) {}
 
   signin() : void {
-    this.dialog.open(SignupComponent);
-    this.userService.connected = true;
+    this.dialog.open(SigninComponent);
   }
 
 }

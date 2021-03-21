@@ -1,41 +1,42 @@
 <h1 mat-dialog-title>S'inscrire</h1>
-<div mat-dialog-content>
-    <mat-vertical-stepper [linear]="true" #stepper>
-        <mat-step [stepControl]="firstFormGroup">
-            <form [formGroup]="firstFormGroup">
-                <ng-template matStepLabel>Fill out your name</ng-template>
-                <mat-form-field>
-                    <mat-label>Name</mat-label>
-                    <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-                </mat-form-field>
-                <div>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-            </form>
-        </mat-step>
-        <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="secondFormGroup">
-                <ng-template matStepLabel>Fill out your address</ng-template>
-                <mat-form-field>
-                    <mat-label>Address</mat-label>
-                    <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-                </mat-form-field>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-            </form>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
-            <p>You are now done.</p>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
-            </div>
-        </mat-step>
-    </mat-vertical-stepper>    
-</div>
+<div style="min-width: 30vw;" mat-dialog-content>
+    <form [formGroup]="signupForm" (submit)="signup()">
+        <mat-form-field appearance="fill">
+            <mat-error *ngIf="signupForm.controls.username.invalid">
+                Entrez un pseudonyme valide
+            </mat-error>
+            <mat-label>Entrez un pseudonyme</mat-label>
+            <input matInput placeholder="Pseudonyme" formControlName="username" required>
+        </mat-form-field><br/>
+        <mat-form-field appearance="fill">
+            <mat-error *ngIf="signupForm.controls.email.invalid">
+                Entrez une adresse email valide
+            </mat-error>
+            <mat-label>Entrez votre adresse email</mat-label>
+            <input matInput placeholder="exemple@exemple.com" formControlName="email" type="email" required>
+        </mat-form-field><br/>
+        <mat-form-field appearance="fill">
+            <mat-error *ngIf="signupForm.controls.password.invalid">
+                Au moins: 8 caracteres, un chiffre, une lettre
+            </mat-error>
+            <mat-label>Entrez un mot de passe</mat-label>
+            <input matInput placeholder="Mot de passe" formControlName="password" type="password" required>
+        </mat-form-field><br/>
+        <mat-form-field appearance="fill">
+            <mat-error *ngIf="signupForm.hasError('notSame')">
+                Les mots de passe ne correspondent pas
+            </mat-error>
+            <mat-label>Confirmer le mot de passe</mat-label>
+            <input matInput placeholder="Confirmez le mot de passe" formControlName="confirmPassword" type="password" [errorStateMatcher]="matcher" required>
+        </mat-form-field><br/>
+        <button mat-button color="accent" type="submit" [disabled]="!signupForm.valid || submitting">
+            S'inscrire
+            <mat-icon *ngIf="submitting"  style="margin-left: 10px;">
+                <mat-spinner [diameter]="20"></mat-spinner>
+            </mat-icon>
+        </button>
+    </form>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Annuler</button>
-</div>
+    <button mat-button mat-dialog-close (click)="signin()">J'ai deja un compte</button>
+    <button mat-button mat-dialog-close>Retour</button>
+</div><br/>

@@ -1,1 +1,31 @@
-<p>signin works!</p>
+<h1 mat-dialog-title>Se connecter</h1>
+<div mat-dialog-content>
+    <mat-error *ngIf="false">
+        Pseudonyme ou mot de passe incorrect.
+    </mat-error><br/>
+    <form [formGroup]="signinForm" (submit)="signin()">
+        <mat-form-field appearance="fill">
+            <mat-error *ngIf="signinForm.controls.username.invalid">
+                Entrez votre pseudonyme
+            </mat-error>
+            <mat-label>Entrez votre pseudonyme</mat-label>
+            <input matInput placeholder="Pseudonyme" formControlName="username" required>
+        </mat-form-field><br/>
+        <mat-form-field appearance="fill">
+            <mat-error *ngIf="signinForm.controls.password.invalid">
+                Entrez votre mot de passe
+            </mat-error>
+            <mat-label>Entrez votre mot de passe</mat-label>
+            <input matInput placeholder="Mot de passe" formControlName="password" type="password" required>
+        </mat-form-field><br/>
+        <button mat-button color="accent" type="submit" [disabled]="!signinForm.valid || submitting">
+            Se connecter 
+            <mat-icon *ngIf="submitting"  style="margin-left: 10px;">
+                <mat-spinner [diameter]="20"></mat-spinner>
+            </mat-icon>
+        </button>
+    </form>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="signup()">Je n'ai pas de compte</button>
+    <button mat-button mat-dialog-close>Retour</button>
+</div><br/>

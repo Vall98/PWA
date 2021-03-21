@@ -7,20 +7,4 @@ html, body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    color: white;
-    background-color: black;
-}
-
-.mat-drawer-container {
-    color: white;
-    background-color: black;
-}
-
-.mat-dialog-container, .mat-dialog-container .mat-stepper-vertical {
-    background: rgb(43, 55, 123);
-    color: white;
-}
-
-.mat-dialog-container .mat-step-header .mat-step-label.mat-step-label-active {
-    color: white;
 }
