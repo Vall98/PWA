@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { UserService } from '../services/user.service';
 import { SignupComponent } from '../signup/signup.component';
 
 @Component({
@@ -13,7 +14,7 @@ export class SigninComponent implements OnInit {
   signinForm: FormGroup;
   submitting: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<SigninComponent>, private userService: UserService) {
     this.signinForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -25,9 +26,17 @@ export class SigninComponent implements OnInit {
 
   signin(): void {
     this.submitting = true;
-    setTimeout(() => {
+    const username = this.signinForm.get('username');
+    const password = this.signinForm.get('password');
+    if (!username || !password) return;
+    this.userService.signin(username.value, password.value).subscribe((data) =>  {
+      this.userService.token = data.access_token;
+      this.userService.updateLocalUserInfo();
+      this.dialogRef.close();
       this.submitting = false;
-    }, 3000);
+    }, (err) => {
+      this.submitting = false;
+    });
   }
 
   signup(): void {

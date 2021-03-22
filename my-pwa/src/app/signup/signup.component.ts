@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { UserService } from '../services/user.service';
 import { SigninComponent } from '../signin/signin.component';
 
 @Component({
@@ -14,7 +15,7 @@ export class SignupComponent implements OnInit {
   submitting: boolean = false;
   matcher = new MyErrorStateMatcher();
 
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<SignupComponent>, public userService: UserService) {
     this.signupForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', Validators.email],
@@ -36,9 +37,20 @@ export class SignupComponent implements OnInit {
 
   signup(): void {
     this.submitting = true;
-    setTimeout(() => {
+    const username = this.signupForm.get('username');
+    const password = this.signupForm.get('password');
+    const email = this.signupForm.get('email');
+    if (!username || !password || !email) return;
+    this.userService.signup(username.value, password.value, email.value).subscribe(() => {
+      this.userService.signin(username.value, password.value).subscribe((data) => {
+        this.userService.updateLocalUserInfo();
+        this.dialogRef.close();
+        this.submitting = false;
+      });
+    }, (err) => {
+      alert("L'inscription n'a pas aboutie.");
       this.submitting = false;
-    }, 3000);
+    });
   }
 
   signin() : void {
