@@ -14,6 +14,8 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   submitting: boolean = false;
   matcher = new MyErrorStateMatcher();
+  hidePassword: boolean = true;
+  hideConfirm: boolean = true;
 
   constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<SignupComponent>, public userService: UserService) {
     this.signupForm = this.formBuilder.group({
@@ -43,6 +45,7 @@ export class SignupComponent implements OnInit {
     if (!username || !password || !email) return;
     this.userService.signup(username.value, password.value, email.value).subscribe(() => {
       this.userService.signin(username.value, password.value).subscribe((data) => {
+        this.userService.token = data.access_token;
         this.userService.updateLocalUserInfo();
         this.dialogRef.close();
         this.submitting = false;

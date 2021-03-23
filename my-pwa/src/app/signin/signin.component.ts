@@ -13,6 +13,7 @@ export class SigninComponent implements OnInit {
 
   signinForm: FormGroup;
   submitting: boolean = false;
+  hidePassword: boolean = true;
 
   constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<SigninComponent>, private userService: UserService) {
     this.signinForm = this.formBuilder.group({

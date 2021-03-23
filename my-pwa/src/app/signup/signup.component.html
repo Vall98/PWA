@@ -20,15 +20,21 @@
                 Au moins: 8 caracteres, un chiffre, une lettre
             </mat-error>
             <mat-label>Entrez un mot de passe</mat-label>
-            <input matInput placeholder="Mot de passe" formControlName="password" type="password" required>
+            <input matInput placeholder="Mot de passe" formControlName="password" [type]="hidePassword ? 'password' : 'text'" required>
+            <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword" [attr.aria-label]="'Cacher le mot de passe'" [attr.aria-pressed]="hidePassword">
+                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
         </mat-form-field><br/>
         <mat-form-field appearance="fill">
             <mat-error *ngIf="signupForm.hasError('notSame')">
                 Les mots de passe ne correspondent pas
             </mat-error>
             <mat-label>Confirmer le mot de passe</mat-label>
-            <input matInput placeholder="Confirmez le mot de passe" formControlName="confirmPassword" type="password" [errorStateMatcher]="matcher" required>
-        </mat-form-field><br/>
+            <input matInput placeholder="Confirmez le mot de passe" formControlName="confirmPassword" [type]="hideConfirm ? 'password' : 'text'" [errorStateMatcher]="matcher" required>
+            <button mat-icon-button matSuffix type="button" (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Cacher le mot de passe'" [attr.aria-pressed]="hideConfirm">
+                <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            </mat-form-field><br/>
         <button mat-button color="accent" type="submit" [disabled]="!signupForm.valid || submitting">
             S'inscrire
             <mat-icon *ngIf="submitting"  style="margin-left: 10px;">
