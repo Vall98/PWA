@@ -14,6 +14,7 @@ export class SigninComponent implements OnInit {
   signinForm: FormGroup;
   submitting: boolean = false;
   hidePassword: boolean = true;
+  error: String | undefined;
 
   constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<SigninComponent>, private userService: UserService) {
     this.signinForm = this.formBuilder.group({
@@ -36,6 +37,7 @@ export class SigninComponent implements OnInit {
       this.dialogRef.close();
       this.submitting = false;
     }, (err) => {
+      this.error = err.error.error_description;
       this.submitting = false;
     });
   }

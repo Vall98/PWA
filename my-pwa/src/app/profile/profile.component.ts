@@ -1,4 +1,3 @@
-import { group } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -18,6 +17,7 @@ export class ProfileComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   hidePassword: boolean = true;
   hideConfirm: boolean = true;
+  formErr: any = {};
 
   constructor(private formBuilder: FormBuilder, public userService : UserService) {
     this.profileForm = this.formBuilder.group({
@@ -62,8 +62,11 @@ export class ProfileComponent implements OnInit {
       this.submitting = false;
       //vos infos ont ete mise a jour
     }, (err) => {
+      this.formErr = err.error;
+      for (let key in this.formErr) {
+        this.profileForm.controls[key]?.setErrors({'custom': err.error[key]});
+      }
       this.submitting = false;
-      //oulala
     });
   }
 

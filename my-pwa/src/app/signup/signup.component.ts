@@ -16,6 +16,7 @@ export class SignupComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   hidePassword: boolean = true;
   hideConfirm: boolean = true;
+  formErr: any = {};
 
   constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<SignupComponent>, public userService: UserService) {
     this.signupForm = this.formBuilder.group({
@@ -51,7 +52,10 @@ export class SignupComponent implements OnInit {
         this.submitting = false;
       });
     }, (err) => {
-      alert("L'inscription n'a pas aboutie.");
+      this.formErr = err.error;
+      for (let key in this.formErr) {
+        this.signupForm.controls[key]?.setErrors({'custom': err.error[key]});
+      }
       this.submitting = false;
     });
   }

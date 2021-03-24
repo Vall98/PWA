@@ -28,6 +28,7 @@ import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CameraComponent } from './camera/camera.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { ProfileComponent } from './profile/profile.component';
     SigninComponent,
     SignupComponent,
     ProfileComponent,
+    CameraComponent,
   ],
   imports: [
     BrowserModule,

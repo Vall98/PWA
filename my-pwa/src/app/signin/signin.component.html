@@ -1,19 +1,19 @@
 <h1 mat-dialog-title>Se connecter</h1>
 <div mat-dialog-content>
-    <mat-error *ngIf="false">
-        Pseudonyme ou mot de passe incorrect.
+    <mat-error *ngIf="error">
+        {{error}}
     </mat-error><br/>
     <form [formGroup]="signinForm" (submit)="signin()">
         <mat-form-field appearance="fill">
             <mat-error *ngIf="signinForm.controls.username.invalid">
-                Entrez votre pseudonyme
+                Entrez votre pseudonyme.
             </mat-error>
             <mat-label>Entrez votre pseudonyme</mat-label>
             <input matInput placeholder="Pseudonyme" formControlName="username" required>
         </mat-form-field><br/>
         <mat-form-field appearance="fill">
             <mat-error *ngIf="signinForm.controls.password.invalid">
-                Entrez votre mot de passe
+                Entrez votre mot de passe.
             </mat-error>
             <mat-label>Entrez votre mot de passe</mat-label>
             <input matInput placeholder="Mot de passe" formControlName="password" [type]="hidePassword ? 'password' : 'text'" required>
