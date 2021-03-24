@@ -1,0 +1,16 @@
+
+.cardo {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.card {
+    max-width: 400px;
+  }
+  
+.header-image {
+    background-image: url('music_note-black-48dp.svg');
+    background-size: cover;
+  }

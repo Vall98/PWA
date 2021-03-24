@@ -14,11 +14,13 @@ import { SoundsComponent } from '../sounds/sounds.component';
 export class DetailsComponent implements OnInit {
     id: number = 0;
     sound = new Sound;
+    public innerWidth: any;
 
     constructor(private route: ActivatedRoute, private http: HttpClient, private userService: UserService) {
     }
     
     ngOnInit(): void {
+        this.innerWidth = window.innerWidth;
         this.getSoundDetail();
       }
 
