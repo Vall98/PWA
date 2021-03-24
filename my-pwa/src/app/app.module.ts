@@ -30,6 +30,7 @@ import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SoundsComponent } from './sounds/sounds.component';
+import { DetailsComponent } from './sound-details/details.component'
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { SoundsComponent } from './sounds/sounds.component';
     SignupComponent,
     ProfileComponent,
     SoundsComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,
