@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SoundsComponent } from './sounds/sounds.component';
 
 
 @NgModule({
@@ -38,6 +40,7 @@ import { ProfileComponent } from './profile/profile.component';
     SigninComponent,
     SignupComponent,
     ProfileComponent,
+    SoundsComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { ProfileComponent } from './profile/profile.component';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

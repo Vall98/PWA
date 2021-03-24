@@ -4,8 +4,11 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
+  //{ path: 'profile', component: ProfileComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
   { path: '**', redirectTo: '' }
 ];
 

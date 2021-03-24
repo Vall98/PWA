@@ -24,7 +24,7 @@ export class UserService {
   }
 
   signup(username: String, password: String, email: String): Observable<any> {
-    const url = environment.api + "users/"
+    const url = environment.api + "users/";
     return this.http.post(url, {username: username, password: password, email: email})
   }
 
