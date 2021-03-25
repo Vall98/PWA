@@ -29,7 +29,6 @@ export class SoundsComponent implements OnInit {
   getSoundsList():void {
     this.getSounds()
       .subscribe(sounds => this.dataSource = sounds.results);
-    console.log(this.dataSource);
   }
 
   getSounds():Observable<any>{

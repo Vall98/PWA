@@ -1,13 +1,14 @@
 
 .cardo {
-    height: 50vh;
+    height: 100vh;
+    width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
 .card {
-    max-width: 400px;
+    max-width: 600px;
   }
   
 .header-image {
