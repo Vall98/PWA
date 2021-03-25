@@ -1,0 +1,13 @@
+<form [formGroup]="searchForm" (submit)="search()">
+    <mat-form-field color="accent" appearance="standard">
+        <input matInput type="text" [matAutocomplete]="auto" placeholder="Rechercher un artiste" formControlName="artistName"/>
+        <mat-icon matSuffix color="accent">search</mat-icon>
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let artist of filterArtists()" [value]="artist.name">
+              {{artist.name}}
+            </mat-option>
+          </mat-autocomplete>
+    </mat-form-field>
+    <button type="submit" style="display: none;"></button>
+    <button type="button" (click)="artistsService.getAllArtists()">reload</button>
+</form>

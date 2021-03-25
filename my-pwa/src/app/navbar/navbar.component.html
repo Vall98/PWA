@@ -6,6 +6,8 @@
         <a class="logo-title">Free-sons</a>
       </button>
       <span class="spacer"></span>
+      <app-artists-search></app-artists-search>
+      <span class="spacer"></span>
       <div *ngIf="userService.connected">
         <button mat-button [matMenuTriggerFor]="profile">
           <mat-icon>account_circle</mat-icon>

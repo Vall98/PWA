@@ -18,6 +18,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +32,9 @@ import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CameraComponent } from './camera/camera.component';
 import { SoundsComponent } from './sounds/sounds.component';
-import { DetailsComponent } from './sound-details/details.component'
+import { DetailsComponent } from './sound-details/details.component';
+import { ArtistDetailsComponent } from './artist-details/artist-details.component';
+import { ArtistsSearchComponent } from './artists-search/artists-search.component'
 
 
 @NgModule({
@@ -45,6 +48,8 @@ import { DetailsComponent } from './sound-details/details.component'
     CameraComponent,
     SoundsComponent,
     DetailsComponent,
+    ArtistDetailsComponent,
+    ArtistsSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +74,8 @@ import { DetailsComponent } from './sound-details/details.component'
     MatProgressSpinnerModule,
     MatGridListModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

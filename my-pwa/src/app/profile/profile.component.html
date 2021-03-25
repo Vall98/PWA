@@ -1,8 +1,8 @@
 <mat-card *ngIf="userService.connected">
     <img class="img" [src]="img" (click)="loadImageFromCamera()"/>
     <button mat-button [disabled]="sendingImage || !img || img == userService.user.profile_picture" (click)="sendImage()">Mettre l'image a jour</button>
-    <input type="file" capture="camera" accept="image/*" id="cameraInput" name="cameraInput" (change)="onFileSelected($event)">
-    <button mat-button (click)="loadImageFromCamera()">
+    <button mat-button (click)="fileInput.click()">
+        <input #fileInput type="file" accept="image/*" capture="camera" (change)="onFileSelected($event)" style="display:none;" />
         <mat-icon>insert_photo</mat-icon>
         Choisir une image
     </button>
