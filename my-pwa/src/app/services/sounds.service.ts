@@ -30,6 +30,49 @@ export class SoundsService {
     const url = environment.api + 'styles/' + id;
     return this.http.get(url, this.getHttpOptions());
   }
+
+  getStyles():Observable<any>{
+    const url = environment.api + 'styles/';
+    const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/x-www-form-urlencoded',
+          Authorization: 'Bearer ' + this.userService.token
+        })
+      };
+    return this.http.get(url, httpOptions);
+  }
+
+  getAlbums():Observable<any>{
+    const url = environment.api + 'albums/';
+    const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/x-www-form-urlencoded',
+          Authorization: 'Bearer ' + this.userService.token
+        })
+      };
+    return this.http.get(url, httpOptions);
+  }
+
+  PostLikeSound(id:number):void{
+    const url = environment.api + 'sounds/' + id + '/like/';
+    this.http.post(url, this.getHttpOptions());
+  }
+
+  PostSound(title:string, style:number, album:number, file:string ):Observable<any>{
+    const url = environment.api + 'sounds/';
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded',
+        Authorization: 'Bearer ' + this.userService.token
+      })
+    };
+    const body = { title:title,
+                   style:style,
+                   file:file,
+                   album:album,
+                   }
+    return this.http.post(url, body, httpOptions);
+  }
 }
 
 export class Sound {
@@ -39,6 +82,7 @@ export class Sound {
   style_name: string = "";
   file: String = "";
   added_on!: Date;
+  like_count: number = 0;
   album: number = 0;
   artist: number = 0;
   added_by: string = "";
@@ -49,4 +93,15 @@ export class Comment {
   sound: string = "";
   post_by: string = "";
   message: string = "";
+}
+
+export class Style {
+  id: number = 0;
+  name: string = "";
+}
+
+export class Album {
+  id: number = 0;
+  title: string = "";
+  picture: string = "";
 }

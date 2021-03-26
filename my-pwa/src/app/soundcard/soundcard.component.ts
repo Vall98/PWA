@@ -23,4 +23,8 @@ export class SoundcardComponent implements OnInit {
       this.soundsService.getStyleByID(this.sound.style).subscribe(style => this.sound.style_name = style.name);
     });
   }
+
+  LikeSound(){
+    this.soundsService.PostLikeSound(this.sound.id);
+  }
 }

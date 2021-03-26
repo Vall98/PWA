@@ -1,11 +1,12 @@
 {
-  "name": "my-pwa",
-  "short_name": "my-pwa",
+  "name": "Free Son",
+  "short_name": "freeson",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
+  "description": "Application to share your sounds",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

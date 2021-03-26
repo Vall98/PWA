@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -35,7 +36,8 @@ import { SoundsComponent } from './sounds/sounds.component';
 import { DetailsComponent } from './sound-details/details.component';
 import { ArtistDetailsComponent } from './artist-details/artist-details.component';
 import { ArtistsSearchComponent } from './artists-search/artists-search.component';
-import { SoundcardComponent } from './soundcard/soundcard.component'
+import { SoundcardComponent } from './soundcard/soundcard.component';
+import { UploadSoundComponent } from './upload-sound/upload-sound.component';
 
 
 @NgModule({
@@ -52,6 +54,7 @@ import { SoundcardComponent } from './soundcard/soundcard.component'
     ArtistDetailsComponent,
     ArtistsSearchComponent,
     SoundcardComponent,
+    UploadSoundComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +80,8 @@ import { SoundcardComponent } from './soundcard/soundcard.component'
     MatGridListModule,
     MatCardModule,
     MatTableModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
