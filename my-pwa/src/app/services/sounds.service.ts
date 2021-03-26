@@ -36,6 +36,48 @@ export class SoundsService {
     return this.http.get(url, this.getHttpOptions());
   }
 
+  getStyles():Observable<any>{
+    const url = environment.api + 'styles/';
+    const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/x-www-form-urlencoded',
+          Authorization: 'Bearer ' + this.userService.token
+        })
+      };
+    return this.http.get(url, httpOptions);
+  }
+
+  getAlbums():Observable<any>{
+    const url = environment.api + 'albums/';
+    const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/x-www-form-urlencoded',
+          Authorization: 'Bearer ' + this.userService.token
+        })
+      };
+    return this.http.get(url, httpOptions);
+  }
+
+  PostLikeSound(id:number):void{
+    const url = environment.api + 'sounds/' + id + '/like/';
+    this.http.post(url, this.getHttpOptions());
+  }
+
+  PostSound(titleInput:string, styleInput:number, albumInput:number, fileInput:File ):Observable<any>{
+    const url = environment.api + 'sounds/';
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded',
+        Authorization: 'Bearer ' + this.userService.token
+      })
+    };
+    const body = { title:titleInput,
+                   style:styleInput,
+                   file:fileInput,
+                   album:albumInput,
+                   }
+    return this.http.post(url, body, httpOptions);
+  }
 }
 
 export class Sound {
@@ -45,6 +87,7 @@ export class Sound {
   style_name: string = "";
   file: String = "";
   added_on!: Date;
+  like_count: number = 0;
   album: number = 0;
   artist: number = 0;
   added_by: number = 0;
@@ -57,9 +100,13 @@ export class Comment {
   message: string = "";
 }
 
+export class Style {
+  id: number = 0;
+  name: string = "";
+}
+
 export class Album {
   id: number = 0;
-  title: String = "";
-  picture: String = "";
-  sounds: Sound[] = [];
+  title: string = "";
+  picture: string = "";
 }

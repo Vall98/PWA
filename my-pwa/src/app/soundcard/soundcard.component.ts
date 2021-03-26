@@ -13,6 +13,7 @@ export class SoundcardComponent implements OnInit {
 
   sound: Sound = new Sound();
   artist: Artist = new Artist();
+  albumPicture: String = "";
 
   constructor(private soundsService: SoundsService, private artistsService: ArtistsService) {
   }
@@ -24,7 +25,12 @@ export class SoundcardComponent implements OnInit {
       const comments: Comment[] = detail.comments;
       this.comments.emit(comments);
       this.soundsService.getStyleByID(this.sound.style).subscribe(style => this.sound.style_name = style.name);
+      this.soundsService.getAlbumById(this.sound.album).subscribe(album => this.albumPicture = album.picture || this.albumPicture);
       this.artist = this.artistsService.getArtistById(this.sound.added_by) || this.artist;
     });
+  }
+  
+  LikeSound(){
+    this.soundsService.PostLikeSound(this.sound.id);
   }
 }

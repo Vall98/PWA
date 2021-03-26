@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -39,6 +40,8 @@ import { ArtistsSearchComponent } from './artists-search/artists-search.componen
 import { SoundcardComponent } from './soundcard/soundcard.component';
 import { AlbumcardComponent } from './albumcard/albumcard.component';
 import { PlaylistcardComponent } from './playlistcard/playlistcard.component';
+import { UploadSoundComponent } from './upload-sound/upload-sound.component';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +59,7 @@ import { PlaylistcardComponent } from './playlistcard/playlistcard.component';
     SoundcardComponent,
     AlbumcardComponent,
     PlaylistcardComponent,
+    UploadSoundComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +86,8 @@ import { PlaylistcardComponent } from './playlistcard/playlistcard.component';
     MatGridListModule,
     MatCardModule,
     MatTableModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

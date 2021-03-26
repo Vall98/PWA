@@ -22,11 +22,6 @@ export class SoundsComponent implements OnInit {
       this.getSoundsList();
   }
 
-  /*getHeroes(): void {
-    this.getSounds()
-      .subscribe(soundss => this.sounds = sounds);
-  }*/
-
   getSoundsList():void {
     this.getSounds()
       .subscribe(sounds => this.dataSource = sounds.results);

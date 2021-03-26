@@ -1,0 +1,35 @@
+<mat-card>
+    <form >
+        <mat-form-field appearance="fill">
+            <mat-label>Titre</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Style</mat-label>
+            <mat-select name="style">
+                <mat-option *ngFor="let style of styles" [value]="style.id">
+                {{style.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Album</mat-label>
+            <mat-select name="album">
+                <mat-option *ngFor="let album of albums" [value]="album.id">
+                {{album.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-card class="example-card" style="margin: 3em; background-color: gainsboro">
+            <mat-card-header>
+              <h2>Upload de fichier</h2>
+            </mat-card-header>
+            <mat-form-field >
+                <input matInput formControlName="filename" placeholder="Fichier" readonly>
+            </mat-form-field>
+            <input type="file" id="file" (change)="onFileSelected($event)" #fileInput style="display: none">
+            <button mat-raised-button (click)="selectFile()">Selectionner</button>
+        </mat-card>
+    </form>
+    <button mat-raised-button (click)="sendSound()" >Envoyer</button>
+</mat-card>
