@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Sound } from '../services/sounds.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Comment, Sound, SoundsService } from '../services/sounds.service';
 
 @Component({
   selector: 'app-soundcard',
@@ -7,11 +7,20 @@ import { Sound } from '../services/sounds.service';
   styleUrls: ['./soundcard.component.css']
 })
 export class SoundcardComponent implements OnInit {
-@Input() sound: Sound | undefined;
+  @Input() soundId: number | undefined;
+  @Output() comments = new EventEmitter<Comment[]>();
 
-  constructor() { }
+  sound: Sound = new Sound();
+
+  constructor(private soundsService: SoundsService) { }
 
   ngOnInit(): void {
+    if (this.soundId == undefined) return;
+    this.soundsService.getSoundById(this.soundId).subscribe((detail) =>  {
+      this.sound = detail;
+      const comments: Comment[] = detail.comments;
+      this.comments.emit(comments);
+      this.soundsService.getStyleByID(this.sound.style).subscribe(style => this.sound.style_name = style.name);
+    });
   }
-
 }
