@@ -1,29 +1,3 @@
 <div class="cardo">
-    <mat-card class="card">
-        <mat-card-header>
-        <div mat-card-avatar class="header-image"></div>
-        <mat-card-title>{{sound.title}}</mat-card-title>
-        <mat-card-subtitle>{{sound.style_name}}</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="music_note-black-48dp.svg" alt="Photo of a Shiba Inu">
-        <mat-card-content>
-        <a mat-raised-button href={{sound.file}} target="_blank">Play ></a>
-        <table mat-table [dataSource]="dataSource">
-            <ng-container matColumnDef="post_by">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let comments"> {{comments.post_by}} :</td>
-            </ng-container>
-            <ng-container matColumnDef="comments">
-                <th mat-header-cell *matHeaderCellDef> Commentaire : </th>
-                <td mat-cell *matCellDef="let comments"> {{comments.message}} </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="'details/' + row.id"></tr>
-        </table>
-        </mat-card-content>
-        <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-        </mat-card-actions>
-    </mat-card>
+    <app-soundcard [sound]="sound"></app-soundcard>
 </div>

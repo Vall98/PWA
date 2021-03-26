@@ -9,13 +9,11 @@ import { Artist, ArtistsService } from '../services/artists.service';
 })
 export class ArtistDetailsComponent implements OnInit {
 
-  artist: Artist = new Artist;
+  artist: Artist;
 
   constructor(private route: ActivatedRoute, private artistsService: ArtistsService) {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.artistsService.getArtist(id).subscribe((data) => {
-      this.artist = data;
-    });
+    this.artist = this.artistsService.artists.find(a => a.id === id) || new Artist();
   }
 
   ngOnInit(): void {

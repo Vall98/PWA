@@ -1,7 +1,9 @@
-{{ artist.name }}
-<!--a *ngFor="let sound of artist.sounds"> {{sound.title}} {{sound.style}} </a-->
-nom
-image
+{{ artist.username }}
+<img [src]="artist.profile_picture"/>
+<div *ngFor="let sound of artist.sounds?.slice(0,3)">
+    <a>{{sound.title}}</a>
+    <a>{{sound.style}}</a>
+</div>
 3 derniers Sons
 Albums
 Playlist

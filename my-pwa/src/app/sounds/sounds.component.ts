@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from '../services/user.service';
+import { Sound } from '../services/sounds.service';
 
 @Component({
   selector: 'app-sounds',
@@ -43,15 +44,4 @@ export class SoundsComponent implements OnInit {
     return this.http.get<Sound[]>(url, httpOptions);
   }
 
-}
-
-export interface Sound {
-  id: number;
-  title: String;
-  style: number;
-  file: String;
-  added_on: Date;
-  album: number;
-  artist: number;
-  added_by: string;
 }

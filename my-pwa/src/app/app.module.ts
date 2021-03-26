@@ -34,7 +34,8 @@ import { CameraComponent } from './camera/camera.component';
 import { SoundsComponent } from './sounds/sounds.component';
 import { DetailsComponent } from './sound-details/details.component';
 import { ArtistDetailsComponent } from './artist-details/artist-details.component';
-import { ArtistsSearchComponent } from './artists-search/artists-search.component'
+import { ArtistsSearchComponent } from './artists-search/artists-search.component';
+import { SoundcardComponent } from './soundcard/soundcard.component'
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { ArtistsSearchComponent } from './artists-search/artists-search.componen
     DetailsComponent,
     ArtistDetailsComponent,
     ArtistsSearchComponent,
+    SoundcardComponent,
   ],
   imports: [
     BrowserModule,

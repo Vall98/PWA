@@ -22,7 +22,7 @@ export class ArtistsSearchComponent implements OnInit {
 
   filterArtists(): Artist[] {
     const value: String = this.searchForm.get('artistName')?.value;
-    return this.artistsService.artists.filter(option => option.name.toLowerCase().indexOf(value.toLowerCase()) === 0);
+    return this.artistsService.artists.filter(option => option.username.toLowerCase().indexOf(value.toLowerCase()) === 0);
   }
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class ArtistsSearchComponent implements OnInit {
   search(): void {
     //get id
     let artist: Artist | undefined = this.artistsService.artists.find(obj => {
-      return obj.name === this.searchForm.get('artistName')?.value;
+      return obj.username === this.searchForm.get('artistName')?.value;
     })
     if (artist) this.router.navigateByUrl('/artist/' + artist.id);
   }

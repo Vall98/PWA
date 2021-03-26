@@ -1,0 +1,8 @@
+.card {
+    max-width: 600px;
+  }
+  
+.header-image {
+    background-image: url('music_note-black-48dp.svg');
+    background-size: cover;
+  }
