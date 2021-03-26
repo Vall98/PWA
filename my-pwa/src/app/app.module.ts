@@ -36,8 +36,9 @@ import { SoundsComponent } from './sounds/sounds.component';
 import { DetailsComponent } from './sound-details/details.component';
 import { ArtistDetailsComponent } from './artist-details/artist-details.component';
 import { ArtistsSearchComponent } from './artists-search/artists-search.component';
-import { SoundcardComponent } from './soundcard/soundcard.component'
-
+import { SoundcardComponent } from './soundcard/soundcard.component';
+import { AlbumcardComponent } from './albumcard/albumcard.component';
+import { PlaylistcardComponent } from './playlistcard/playlistcard.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,8 @@ import { SoundcardComponent } from './soundcard/soundcard.component'
     ArtistDetailsComponent,
     ArtistsSearchComponent,
     SoundcardComponent,
+    AlbumcardComponent,
+    PlaylistcardComponent,
   ],
   imports: [
     BrowserModule,

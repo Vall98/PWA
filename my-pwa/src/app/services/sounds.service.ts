@@ -30,6 +30,12 @@ export class SoundsService {
     const url = environment.api + 'styles/' + id;
     return this.http.get(url, this.getHttpOptions());
   }
+
+  getAlbumById(id: number): Observable<any> {
+    const url = environment.api + 'albums/' + id;
+    return this.http.get(url, this.getHttpOptions());
+  }
+
 }
 
 export class Sound {
@@ -49,4 +55,11 @@ export class Comment {
   sound: string = "";
   post_by: string = "";
   message: string = "";
+}
+
+export class Album {
+  id: number = 0;
+  title: String = "";
+  picture: String = "";
+  sounds: Sound[] = [];
 }
