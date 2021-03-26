@@ -41,7 +41,7 @@ export class Sound {
   added_on!: Date;
   album: number = 0;
   artist: number = 0;
-  added_by: string = "";
+  added_by: number = 0;
 }
 
 export class Comment {

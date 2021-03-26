@@ -4,7 +4,7 @@ artist.username
 
 </div>
 <div fxLayout="row" fxLayoutAlign="space-evenly">
-    <app-soundcard *ngFor="let sound of artist.sounds.slice(0,3)" [profile_picture]="artist.profile_picture" [soundId]="sound.id"></app-soundcard>
+    <app-soundcard *ngFor="let sound of artist.sounds.slice(0,3)" [soundId]="sound.id"></app-soundcard>
 </div>
 
 bandeau Albums

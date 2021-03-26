@@ -17,9 +17,7 @@ export class ArtistDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       let id = Number(params['id']);
-      this.artist = this.artistsService.artists.find(a => a.id === id) || this.artist;
-      if (!this.artist.profile_picture || this.artist.profile_picture == "")
-        this.artist.profile_picture = "https://static.thenounproject.com/png/55431-200.png"
+      this.artist = this.artistsService.getArtistById(id) || this.artist;
     });
   }
 

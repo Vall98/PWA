@@ -22,10 +22,17 @@ export class ArtistsService {
     };
   }
 
+  getArtistById(id: number): Artist | undefined {
+    return this.artists.find(a => a.id === id);
+  }
+
   getAllArtists(): void {
     const url = environment.api + "users/"
     this.http.get(url + "?ordering=username", this.getHttpOptions()).subscribe((data: any) => {
       this.artists = data.results;
+      for (let a of this.artists) {
+        if (!a.profile_picture || a.profile_picture == "") a.profile_picture = "https://static.thenounproject.com/png/55431-200.png";
+      }
     }, (err) => {
       alert(err.error);
     });

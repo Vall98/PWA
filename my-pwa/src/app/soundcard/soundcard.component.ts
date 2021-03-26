@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Artist, ArtistsService } from '../services/artists.service';
 import { Comment, Sound, SoundsService } from '../services/sounds.service';
 
 @Component({
@@ -8,12 +9,12 @@ import { Comment, Sound, SoundsService } from '../services/sounds.service';
 })
 export class SoundcardComponent implements OnInit {
   @Input() soundId: number | undefined;
-  @Input() profile_picture: String | undefined;
   @Output() comments = new EventEmitter<Comment[]>();
 
   sound: Sound = new Sound();
+  artist: Artist = new Artist();
 
-  constructor(private soundsService: SoundsService) {
+  constructor(private soundsService: SoundsService, private artistsService: ArtistsService) {
   }
 
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class SoundcardComponent implements OnInit {
       const comments: Comment[] = detail.comments;
       this.comments.emit(comments);
       this.soundsService.getStyleByID(this.sound.style).subscribe(style => this.sound.style_name = style.name);
+      this.artist = this.artistsService.getArtistById(this.sound.added_by) || this.artist;
     });
   }
 }
