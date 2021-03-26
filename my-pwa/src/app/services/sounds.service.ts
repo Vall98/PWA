@@ -58,7 +58,7 @@ export class SoundsService {
     this.http.post(url, this.getHttpOptions());
   }
 
-  PostSound(title:string, style:number, album:number, file:string ):Observable<any>{
+  PostSound(titleInput:string, styleInput:number, albumInput:number, fileInput:File ):Observable<any>{
     const url = environment.api + 'sounds/';
     const httpOptions = {
       headers: new HttpHeaders({
@@ -66,10 +66,10 @@ export class SoundsService {
         Authorization: 'Bearer ' + this.userService.token
       })
     };
-    const body = { title:title,
-                   style:style,
-                   file:file,
-                   album:album,
+    const body = { title:titleInput,
+                   style:styleInput,
+                   file:fileInput,
+                   album:albumInput,
                    }
     return this.http.post(url, body, httpOptions);
   }

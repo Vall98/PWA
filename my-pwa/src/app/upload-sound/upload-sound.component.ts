@@ -12,7 +12,7 @@ export class UploadSoundComponent implements OnInit {
   styles: Style[] = [];
   albums: Album[] = [];
   soundForm: FormGroup;
-  file: string = '';
+  file!: File;
 
   @ViewChild('fileInput')
   fileInput!: ElementRef;
@@ -38,7 +38,7 @@ export class UploadSoundComponent implements OnInit {
   onFileSelected(event: any): void {
     if(event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
-      this.soundForm.get('filename')?.setValue(this.soundForm.get('titre')?.value);
+      this.soundForm.get('filename')?.setValue(this.file.name);
     }
   }
 
