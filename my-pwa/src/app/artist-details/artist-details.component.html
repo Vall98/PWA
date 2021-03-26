@@ -1,10 +1,11 @@
-{{ artist.username }}
-<img [src]="artist.profile_picture"/>
-<div *ngFor="let sound of artist.sounds?.slice(0,3)">
-    <a>{{sound.title}}</a>
-    <a>{{sound.style}}</a>
+artist.username
+
+<div class="artists-infos" [style.background-image]="artist.profile_picture">
+
 </div>
-3 derniers Sons
-Albums
-Playlist
-nb de followers
+<div fxLayout="row" fxLayoutAlign="space-evenly">
+    <app-soundcard *ngFor="let sound of artist.sounds.slice(0,3)" [soundId]="sound.id"></app-soundcard>
+</div>
+
+bandeau Albums
+bandeau Playlist

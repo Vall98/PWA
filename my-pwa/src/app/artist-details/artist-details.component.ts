@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Artist, ArtistsService } from '../services/artists.service';
 
@@ -9,14 +9,16 @@ import { Artist, ArtistsService } from '../services/artists.service';
 })
 export class ArtistDetailsComponent implements OnInit {
 
-  artist: Artist;
+  artist: Artist = new Artist();
 
   constructor(private route: ActivatedRoute, private artistsService: ArtistsService) {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.artist = this.artistsService.artists.find(a => a.id === id) || new Artist();
   }
-
+  
   ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      let id = Number(params['id']);
+      this.artist = this.artistsService.getArtistById(id) || this.artist;
+    });
   }
 
 }

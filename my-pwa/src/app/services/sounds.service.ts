@@ -85,7 +85,7 @@ export class Sound {
   like_count: number = 0;
   album: number = 0;
   artist: number = 0;
-  added_by: string = "";
+  added_by: number = 0;
 }
 
 export class Comment {
