@@ -8,11 +8,13 @@ import { Comment, Sound, SoundsService } from '../services/sounds.service';
 })
 export class SoundcardComponent implements OnInit {
   @Input() soundId: number | undefined;
+  @Input() profile_picture: String | undefined;
   @Output() comments = new EventEmitter<Comment[]>();
 
   sound: Sound = new Sound();
 
-  constructor(private soundsService: SoundsService) { }
+  constructor(private soundsService: SoundsService) {
+  }
 
   ngOnInit(): void {
     if (this.soundId == undefined) return;

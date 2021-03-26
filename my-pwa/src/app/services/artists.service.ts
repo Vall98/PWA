@@ -35,7 +35,7 @@ export class ArtistsService {
 export class Artist {
   id: number = 0;
   username: String = "";
-  profile_picture: ArrayBuffer | String = "";
+  profile_picture: String = "";
   sounds: any[] = [];
   playlists: any[] = [];
 }
