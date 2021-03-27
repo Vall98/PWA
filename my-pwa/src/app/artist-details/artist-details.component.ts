@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Artist, ArtistsService } from '../services/artists.service';
+import { Album } from '../services/sounds.service';
 
 @Component({
   selector: 'app-artist-details',
@@ -18,6 +19,7 @@ export class ArtistDetailsComponent implements OnInit {
     this.route.params.subscribe((params) => {
       let id = Number(params['id']);
       this.artist = this.artistsService.getArtistById(id) || this.artist;
+      this.artist.albums = [new Album()]
     });
   }
 

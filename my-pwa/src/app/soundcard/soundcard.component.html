@@ -4,7 +4,7 @@
         <mat-card-title>{{sound.title}}</mat-card-title>
         <mat-card-subtitle>{{sound.style_name}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="albumPicture">
+    <img mat-card-image [src]="albumPicture">
     <mat-card-content>
         <audio controls="" name="media" [src]="sound.file"></audio>
     </mat-card-content>

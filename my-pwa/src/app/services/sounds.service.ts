@@ -110,3 +110,11 @@ export class Album {
   title: string = "";
   picture: string = "";
 }
+
+export class Playlist {
+  id: number = 0;
+  title: String = "";
+  sounds: Sound[] = [];
+  comments: Comment[] = [];
+  added_by: number = 0;
+}

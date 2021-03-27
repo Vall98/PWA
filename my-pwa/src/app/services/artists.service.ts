@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Album, Playlist, Sound } from './sounds.service';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -42,7 +43,8 @@ export class ArtistsService {
 export class Artist {
   id: number = 0;
   username: String = "";
-  profile_picture: String = "";
-  sounds: any[] = [];
-  playlists: any[] = [];
+  profile_picture: String = "https://static.thenounproject.com/png/55431-200.png";
+  sounds: Sound[] = [];
+  playlists: Playlist[] = [];
+  albums: Album[] = [];
 }

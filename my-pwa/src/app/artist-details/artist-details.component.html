@@ -8,4 +8,11 @@ artist.username
 </div>
 
 bandeau Albums
+<div *ngFor="let album of artist.albums">
+    <app-albumcard [albumId]="1"></app-albumcard>
+</div>
+
 bandeau Playlist
+<div *ngFor="let playlist of artist.playlists">
+    <app-playlistcard [playlistId]="1"></app-playlistcard>
+</div>

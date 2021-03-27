@@ -13,7 +13,7 @@ export class SoundcardComponent implements OnInit {
 
   sound: Sound = new Sound();
   artist: Artist = new Artist();
-  albumPicture: String = "";
+  albumPicture: String = "https://static.thenounproject.com/png/55431-200.png";
 
   constructor(private soundsService: SoundsService, private artistsService: ArtistsService) {
   }
@@ -29,7 +29,7 @@ export class SoundcardComponent implements OnInit {
       this.artist = this.artistsService.getArtistById(this.sound.added_by) || this.artist;
     });
   }
-  
+
   LikeSound(){
     this.soundsService.PostLikeSound(this.sound.id);
   }
