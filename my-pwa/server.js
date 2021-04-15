@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-app.use(express.static('./dist/project-name'));
+app.use(express.static('./dist/my-pwa'));
 
 app.get('/*', function (req, res) {
   res.sendFile('index.html', { root: 'dist/project-name' }
