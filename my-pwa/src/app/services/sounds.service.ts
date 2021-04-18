@@ -11,72 +11,54 @@ export class SoundsService {
 
   constructor(private http: HttpClient, private userService: UserService) { }
 
-  getHttpOptions() {
-    alert ("Retirer l'autentification pour les get");
-     return {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/x-www-form-urlencoded',
-        Authorization: 'Bearer ' + this.userService.token
-      })
-    };
-  }
-
-  getSoundById(id: number):Observable<any>{
+  getSoundById(id: number): Observable<any>{
       const url = environment.api + 'sounds/' + id;
-      return this.http.get<Sound[]>(url, this.getHttpOptions());
+      return this.http.get<Sound[]>(url);
   }
 
-  getStyleByID(id:number):Observable<any>{
+  getStyleByID(id: number): Observable<any>{
     const url = environment.api + 'styles/' + id;
-    return this.http.get(url, this.getHttpOptions());
+    return this.http.get(url);
   }
 
   getAlbumById(id: number): Observable<any> {
     const url = environment.api + 'albums/' + id;
-    return this.http.get(url, this.getHttpOptions());
+    return this.http.get(url);
   }
 
-  getStyles():Observable<any>{
+  getStyles(): Observable<any>{
     const url = environment.api + 'styles/';
-    const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/x-www-form-urlencoded',
-          Authorization: 'Bearer ' + this.userService.token
-        })
-      };
-    return this.http.get(url, httpOptions);
+    return this.http.get(url);
   }
 
-  getAlbums():Observable<any>{
+  getAlbums(): Observable<any>{
     const url = environment.api + 'albums/';
-    const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/x-www-form-urlencoded',
-          Authorization: 'Bearer ' + this.userService.token
-        })
-      };
-    return this.http.get(url, httpOptions);
+    return this.http.get(url);
   }
 
-  PostLikeSound(id:number):void{
+/*  postLikeSound(id: number): void{
     const url = environment.api + 'sounds/' + id + '/like/';
-    this.http.post(url, this.getHttpOptions());
-  }
-
-  PostSound(titleInput:string, styleInput:number, albumInput:number, fileInput:File ):Observable<any>{
-    const url = environment.api + 'sounds/';
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/x-www-form-urlencoded',
         Authorization: 'Bearer ' + this.userService.token
       })
     };
-    const body = { title:titleInput,
-                   style:styleInput,
-                   file:fileInput,
-                   album:albumInput,
+    this.http.post(url, {id: id}, httpOptions).subscribe((data) => {
+
+    }, (err) => {
+      console.log(err);
+    });
+  }*/
+
+  postSound(titleInput: string, styleInput: number, albumInput: number, fileInput: File): Observable<any>{
+    const url = environment.api + 'sounds/';
+    const body = { title: titleInput,
+                   style: styleInput,
+                   file: fileInput,
+                   album: albumInput,
                    }
-    return this.http.post(url, body, httpOptions);
+    return this.http.post(url, body);
   }
 }
 
@@ -88,7 +70,7 @@ export class Sound {
   file: String = "";
   added_on!: Date;
   like_count: number = 0;
-  album: number = 0;
+  album: Album = new Album();
   artist: number = 0;
   added_by: number = 0;
 }

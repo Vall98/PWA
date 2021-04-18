@@ -34,10 +34,14 @@ export class SigninComponent implements OnInit {
     this.userService.signin(username.value, password.value).subscribe((data) =>  {
       this.userService.token = data.access_token;
       this.userService.updateLocalUserInfo();
+      this.userService.saveToken(data.access_token);
       this.dialogRef.close();
       this.submitting = false;
     }, (err) => {
       this.error = err.error.error_description;
+      if (this.error = "Invalid credentials given.") {
+        this.error = "Identifiant ou mot de passe incorrect."
+      }
       this.submitting = false;
     });
   }

@@ -19,7 +19,6 @@ export class ArtistDetailsComponent implements OnInit {
     this.route.params.subscribe((params) => {
       let id = Number(params['id']);
       this.artist = this.artistsService.getArtistById(id) || this.artist;
-      this.artist.albums = [new Album()]
     });
   }
 

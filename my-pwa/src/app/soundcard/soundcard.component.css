@@ -1,5 +1,10 @@
 .card {
   width: 300px;
+  margin-bottom: 20px;
+}
+
+.mat-card-image {
+  height: 332px;
 }
   
 .header-image {

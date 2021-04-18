@@ -8,11 +8,14 @@
         <th mat-header-cell *matHeaderCellDef> Titre </th>
         <td mat-cell *matCellDef="let sound"> {{sound.title}} </td>
     </ng-container>
-    <ng-container matColumnDef="file">
-        <th mat-header-cell *matHeaderCellDef> Fichier </th>
-        <td mat-cell *matCellDef="let sound"> {{sound.file}} </td>
+    <ng-container matColumnDef="sound">
+        <th mat-header-cell *matHeaderCellDef> Son </th>
+        <td mat-cell *matCellDef="let sound">
+            <mat-card-content>
+                <audio controls="" name="media" [src]="sound.file"></audio>
+            </mat-card-content>
+        </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="'details/' + row.id"></tr>
 </table>
-<button (click)="getSoundsList()" >get Sounds</button>

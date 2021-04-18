@@ -1,18 +1,22 @@
-artist.username
+<div>
+    <img />
+    <h1>{{artist.username}}</h1><br />
+    <!--{{ artist.followers_count }}-->
+</div>
 
 <div class="artists-infos" [style.background-image]="artist.profile_picture">
 
 </div>
-<div fxLayout="row" fxLayoutAlign="space-evenly">
+<div fxLayout="row wrap" fxLayoutAlign="space-around center">
     <app-soundcard *ngFor="let sound of artist.sounds.slice(0,3)" [soundId]="sound.id"></app-soundcard>
 </div>
 
 bandeau Albums
 <div *ngFor="let album of artist.albums">
-    <app-albumcard [albumId]="1"></app-albumcard>
+    <app-albumcard [albumId]="album.id"></app-albumcard>
 </div>
 
 bandeau Playlist
 <div *ngFor="let playlist of artist.playlists">
-    <app-playlistcard [playlistId]="1"></app-playlistcard>
+    <app-playlistcard [playlistId]="playlist.id"></app-playlistcard>
 </div>

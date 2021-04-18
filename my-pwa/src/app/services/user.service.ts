@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Album, Sound } from './sounds.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,36 @@ export class UserService {
   user: User = new User();
   token: String = "";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.connectFromToken();
+  }
+
+  private connectFromToken(): void {
+    const token = this.retrieveToken();
+    if (token == null) {
+      return;
+    }
+    this.token = token;
+    const url = environment.api + "profile/"
+    const httpOptions = this.getUserAuthHeader();
+    this.http.get(url, httpOptions).subscribe((data: any) => {
+      this.user = data;
+      this.connected = true;
+      if (!this.user.profile_picture || this.user.profile_picture == "") {
+        this.user.profile_picture = "https://ts3.wondercube.fr/images/default_profile.png";
+      }
+    }, (err) => {
+      this.token = "";
+    });
+  }
+
+  saveToken(token: string): void {
+    localStorage.setItem('id_token', token);
+  }
+  
+  private retrieveToken(): string | null {
+    return localStorage.getItem('id_token');
+  }
 
   getUserAuthHeader(): { headers: HttpHeaders; } {
     return {
@@ -62,7 +92,6 @@ export class UserService {
       console.log("Could not retrieve user info.");
     });
   }
-
 }
 
 class User {
@@ -70,4 +99,6 @@ class User {
   username: String = "";
   email: String = "";
   profile_picture: string | ArrayBuffer = "";
+  albums: Album[] = [];
+  sounds: Sound[] = [];
 }
