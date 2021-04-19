@@ -20,7 +20,11 @@
 .title {
     font-size: 35px;
     font-weight: bold;
+}
+
+.sounds {
     margin-left: 75px;
+    margin-right: 75px;
 }
 
 .card-list {
@@ -36,7 +40,8 @@
         margin-left: 10px;
     }
 
-    .title {
+    .sounds {
         margin-left: 10px;
+        margin-right: 10px;
     }
 }

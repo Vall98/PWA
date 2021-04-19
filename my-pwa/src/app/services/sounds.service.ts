@@ -102,11 +102,3 @@ export class Album {
   added_by: number = 0;
   sounds: Sound[] = [];
 }
-
-export class Playlist {
-  id: number = 0;
-  title: String = "";
-  sounds: Sound[] = [];
-  comments: Comment[] = [];
-  added_by: number = 0;
-}

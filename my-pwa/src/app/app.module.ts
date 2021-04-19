@@ -39,7 +39,6 @@ import { ArtistDetailsComponent } from './artist-details/artist-details.componen
 import { ArtistsSearchComponent } from './artists-search/artists-search.component';
 import { SoundcardComponent } from './soundcard/soundcard.component';
 import { AlbumcardComponent } from './albumcard/albumcard.component';
-import { PlaylistcardComponent } from './playlistcard/playlistcard.component';
 import { UploadSoundComponent } from './upload-sound/upload-sound.component';
 import { CreateAlbumComponent } from './create-album/create-album.component';
 import { AlbumDetailsComponent } from './album-details/album-details.component';
@@ -59,7 +58,6 @@ import { AlbumDetailsComponent } from './album-details/album-details.component';
     ArtistsSearchComponent,
     SoundcardComponent,
     AlbumcardComponent,
-    PlaylistcardComponent,
     UploadSoundComponent,
     CreateAlbumComponent,
     AlbumDetailsComponent

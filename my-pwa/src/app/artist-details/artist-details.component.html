@@ -10,14 +10,16 @@
         </div>
     </div>
 
-    <h2 class="title" *ngIf="artist.sounds.length > 0">Ses Free-Sons</h2>
-    <div class="card-list" fxLayout="row wrap" fxLayoutAlign="space-around center">
-        <app-soundcard *ngFor="let sound of artist.sounds" [soundId]="sound.id"></app-soundcard><!--.slice(0,3)-->
-    </div>
-    
-    <h2 class="title" *ngIf="artist.albums.length > 0">Ses Albums</h2>
-    <div class="card-list" fxLayout="row wrap" fxLayoutAlign="space-around center">
-        <app-albumcard *ngFor="let album of artist.albums" [albumId]="album.id"></app-albumcard>
+    <div class="sounds">
+        <h2 class="title" *ngIf="artist.sounds.length > 0">Ses Free-Sons</h2>
+        <div class="card-list" fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <app-soundcard *ngFor="let sound of artist.sounds" [soundId]="sound.id"></app-soundcard><!--.slice(0,3)-->
+        </div>
+        
+        <h2 class="title" *ngIf="artist.albums.length > 0">Ses Albums</h2>
+        <div class="card-list" fxLayout="row wrap" fxLayoutAlign="space-around center">
+            <app-albumcard *ngFor="let album of artist.albums" [albumId]="album.id"></app-albumcard>
+        </div>
     </div>
     
     <!--h2 class="title" *ngIf="artist.playlists.length > 0">Ses Playlists</h2>
