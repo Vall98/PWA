@@ -42,6 +42,7 @@ import { AlbumcardComponent } from './albumcard/albumcard.component';
 import { PlaylistcardComponent } from './playlistcard/playlistcard.component';
 import { UploadSoundComponent } from './upload-sound/upload-sound.component';
 import { CreateAlbumComponent } from './create-album/create-album.component';
+import { AlbumDetailsComponent } from './album-details/album-details.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { CreateAlbumComponent } from './create-album/create-album.component';
     AlbumcardComponent,
     PlaylistcardComponent,
     UploadSoundComponent,
-    CreateAlbumComponent
+    CreateAlbumComponent,
+    AlbumDetailsComponent
   ],
   imports: [
     BrowserModule,
