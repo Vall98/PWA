@@ -31,13 +31,27 @@
     {
       "name": "profile",
       "urls": [
-        "/profile"
+        "/profile/"
       ],
       "cacheConfig": {
         "maxSize": 1,
         "maxAge": "7d",
         "timeout": "0u",
         "strategy": "freshness"
+      }
+    },
+    {
+      "name": "sounds",
+      "urls": [
+        "/users/**",
+        "/sounds/**",
+        "/albums/**",
+        "/styles/**"
+      ],
+      "cacheConfig": {
+        "maxSize": 100,
+        "maxAge": "3d",
+        "strategy": "performance"
       }
     }
   ]

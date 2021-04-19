@@ -63,13 +63,13 @@ import { AlbumDetailsComponent } from './album-details/album-details.component';
     AlbumDetailsComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js',),//{ enabled: environment.production }),
     ScrollingModule,
     LayoutModule,
     FlexLayoutModule,
