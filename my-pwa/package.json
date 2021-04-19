@@ -17,6 +17,7 @@
     "build:ssr": "ng build --prod && ng run free-sons:server:production",
     "prerender": "ng run free-sons:prerender"
   },
+  "preinstall": "./release-tasks.sh",
   "postinstall": "npm run build:ssr",
   "private": true,
   "dependencies": {
