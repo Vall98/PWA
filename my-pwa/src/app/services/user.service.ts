@@ -44,6 +44,15 @@ export class UserService {
     return localStorage.getItem('id_token');
   }
 
+  getUserAuthHeaderFileTransfer() {
+    return {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        Authorization: 'Bearer ' + this.token
+      })
+    };
+  }
+
   getUserAuthHeader(): { headers: HttpHeaders; } {
     return {
       headers: new HttpHeaders({
@@ -77,6 +86,14 @@ export class UserService {
     if (!!password && password != "") body += "password=" + password + "&";
     if (!!email && email != "") body += "email=" + email + "&";
     return this.http.patch(url, body, httpOptions);
+  }
+
+  updatePicture(file: File): Observable<any> {
+    const url = environment.api + "upload-profile-picture/";
+    const httpOptions = this.getUserAuthHeaderFileTransfer();
+    let formData = new FormData();
+    formData.append('picture', file, file.name);
+    return this.http.patch(url, formData, httpOptions);
   }
 
   updateLocalUserInfo(): void {

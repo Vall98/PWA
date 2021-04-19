@@ -11,7 +11,8 @@ import { UserService } from '../services/user.service';
 export class ProfileComponent implements OnInit {
 
   profileForm: FormGroup;
-  img: string | ArrayBuffer = this.userService.user.profile_picture;
+  img: string | ArrayBuffer | null = this.userService.user.profile_picture;
+  imgFile: File | undefined;
   sendingImage: boolean = false;
   submitting: boolean = false;
   matcher = new MyErrorStateMatcher();
@@ -46,10 +47,15 @@ export class ProfileComponent implements OnInit {
   }
 
   onFileSelected(event: any): void {
-    console.log(event.target.files[0]);
+    const file: File = event.target.files[0];
+    let self = this;
+    let readerUrl = new FileReader();
+    readerUrl.onload = function () {
+      self.img = readerUrl.result;
+    }
+    readerUrl.readAsDataURL(file);
+    this.imgFile = file;
   }
-
-  loadImageFromCamera(): void {}
 
   updateProfile(): void {
     const username = this.profileForm.get('username')?.value;
@@ -71,13 +77,21 @@ export class ProfileComponent implements OnInit {
   }
 
   sendImage(): void {
-    
+    if (!this.imgFile) return;
+    this.sendingImage = true;
+    this.userService.updatePicture(this.imgFile).subscribe((data) => {
+      this.sendingImage = false;
+      this.img = data.picture;
+      this.userService.user.profile_picture = data.picture;
+    }, (err) => {
+      this.sendingImage = false;
+    });
   }
 
 }
 
 class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective| NgForm | null): boolean {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const invalidCtrl = !!(control?.invalid && control?.parent?.dirty);
     const invalidParent = !!(control?.parent?.invalid && control?.parent?.dirty);
     return invalidCtrl || invalidParent;

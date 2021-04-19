@@ -1,17 +1,24 @@
-.grid-button-article {
-    margin-left: 15px;
-    margin-right: 15px;
+.stepper{
+    padding-left: 90px;
 }
 
 mat-form-field {
-    width: 50%;
-    margin-bottom: 10px;
+    min-width: 50%;
 }
 
-mat-card {
-    text-align: center;
+.asterix--after:after {
+    content: "*";
+    color: red;
 }
 
-form {
-    margin-top: 50px;
+.or {
+    line-height: 55px;
+    margin-left: 15px;
+}
+
+@media (max-width: 599px) {
+
+    .stepper {
+        padding-left: 0px;
+    }
 }

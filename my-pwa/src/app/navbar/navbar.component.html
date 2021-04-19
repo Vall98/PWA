@@ -15,7 +15,7 @@
         </button>
         <mat-menu #profile="matMenu">
           <button mat-menu-item routerLink="/upload">Mettre un son en ligne</button>
-          <button mat-menu-item routerLink="/my-sounds">Mes Free-sons</button>
+          <button mat-menu-item [routerLink]="'/artist/' + userService.user.id">Mes Free-sons</button>
           <button mat-menu-item>Mes playlists</button>
           <mat-divider></mat-divider>
           <button mat-menu-item routerLink="/profile">

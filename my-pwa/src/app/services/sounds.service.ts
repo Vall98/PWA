@@ -51,14 +51,22 @@ export class SoundsService {
     });
   }*/
 
-  postSound(titleInput: string, styleInput: number, albumInput: number, fileInput: File): Observable<any>{
+  postSound(titleInput: string, styleInput: number, albumInput: number, fileInput: File): Observable<any> {
     const url = environment.api + 'sounds/';
-    const body = { title: titleInput,
-                   style: styleInput,
-                   file: fileInput,
-                   album: albumInput,
-                   }
-    return this.http.post(url, body);
+    let formData: FormData = new FormData();
+    formData.append('title', titleInput);
+    formData.append('style', '' + styleInput);
+    formData.append('file', fileInput, fileInput.name);
+    formData.append('album', '' + albumInput);
+    return this.http.post(url, formData, this.userService.getUserAuthHeaderFileTransfer());
+  }
+
+  postAlbum(titleInput: string, fileInput: File): Observable<any> {
+    const url = environment.api + 'albums/';
+    let formData: FormData = new FormData();
+    formData.append('title', titleInput);
+    formData.append('picture', fileInput, fileInput.name);
+    return this.http.post(url, formData, this.userService.getUserAuthHeaderFileTransfer());
   }
 }
 

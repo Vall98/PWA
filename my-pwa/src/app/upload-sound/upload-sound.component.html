@@ -1,39 +1,74 @@
-<mat-card>
-    <form >
-        <mat-form-field appearance="fill">
-            <mat-label>Titre</mat-label>
-            <input matInput>
-        </mat-form-field><br/>
-        <mat-form-field appearance="fill">
-            <mat-label>Style</mat-label>
-            <mat-select name="style">
-                <mat-option *ngFor="let style of styles" [value]="style.id">
-                {{style.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field><br/>
-        <mat-form-field appearance="fill">
-            <mat-label>Album</mat-label>
-            <mat-select name="album">
-                <mat-option [value]="-1">
-                    Creer un album
-                </mat-option>
-                <mat-divider></mat-divider>
-                <mat-option *ngFor="let album of userService.user.albums" [value]="album.id">
-                    {{album.title}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-card class="example-card" style="margin: 3em; background-color: gainsboro">
-            <mat-card-header>
-              <h2>Upload de fichier</h2>
-            </mat-card-header>
-            <mat-form-field >
-                <input matInput formControlName="filename" placeholder="Fichier" readonly>
+<mat-vertical-stepper [linear]="true" class="stepper" #stepper>
+    <mat-step [stepControl]="soundFormTitle">
+        <form [formGroup]="soundFormTitle">
+            <ng-template matStepLabel>Choisissez un titre</ng-template>
+            <mat-form-field>
+                <mat-label>Titre</mat-label>
+                <input matInput placeholder="Titre" formControlName="title" required>
             </mat-form-field>
-            <input type="file" id="file" (change)="onFileSelected($event)" #fileInput style="display: none">
-            <button mat-raised-button (click)="selectFile()">Selectionner</button>
-        </mat-card>
-    </form>
-    <button mat-raised-button (click)="sendSound()" >Envoyer</button>
-</mat-card>
+            <div>
+                <button mat-button matStepperNext>Suivant</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="soundFormStyle">
+        <form [formGroup]="soundFormStyle">
+            <ng-template matStepLabel>Choisissez un style</ng-template>
+            <mat-form-field>
+                <mat-label>Style</mat-label>
+                <mat-select name="style" formControlName="style" required>
+                    <mat-option *ngFor="let style of styles" [value]="style.id">
+                    {{style.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext>Suivant</button>
+                <button mat-button matStepperPrevious>Précédent</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="soundFormAlbum">
+        <form [formGroup]="soundFormAlbum">
+            <ng-template matStepLabel>Choisissez un album</ng-template>
+            <div style="display: flex;">
+                <mat-form-field>
+                    <mat-label>Album</mat-label>
+                    <mat-select name="album" formControlName="album" required>
+                        <mat-option *ngFor="let album of userService.user.albums" [value]="album.id">
+                        {{album.title}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <label class="or">ou</label>
+                <button mat-button color="accent" class="create-album" (click)="createAlbum()">Créer un Album</button>
+            </div>
+            <div>
+                <button mat-button matStepperNext>Suivant</button>
+                <button mat-button matStepperPrevious>Précédent</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="soundFormFile">
+        <form [formGroup]="soundFormFile">
+            <ng-template matStepLabel>Choisissez un son</ng-template>
+            <input #fileInput type="file" accept="audio/*" (change)="onFileSelected($event)" formControlName=file required/>
+            <div>
+                <button mat-button matStepperNext>Suivant</button>
+                <button mat-button matStepperPrevious>Précédent</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Terminer</ng-template>
+        <div>
+            <button mat-button color="accent" (click)="postSound()" [disabled]="submitting">
+                Upload le son
+                <mat-icon *ngIf="submitting" style="margin-left: 10px;">
+                    <mat-spinner [diameter]="20"></mat-spinner>
+                </mat-icon>
+            </button>
+            <button mat-button matStepperPrevious>Précédent</button>
+        </div>
+    </mat-step>
+</mat-vertical-stepper>

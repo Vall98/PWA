@@ -19,7 +19,6 @@ export class AlbumcardComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.albumId == undefined) return;
-    console.log(this.albumId)
     this.soundsService.getAlbumById(this.albumId).subscribe((album) =>  {
       this.album = album;
       if (!this.album.picture || this.album.picture == "") this.album.picture = "https://static.thenounproject.com/png/55431-200.png";
@@ -27,5 +26,9 @@ export class AlbumcardComponent implements OnInit {
       this.sounds.emit(sounds);
       //this.artist = this.artistsService.getArtistById(this.album.added_by) || this.artist;
     });
+  }
+
+  stopPropagation(event: any): void {
+    event.stopPropagation();
   }
 }

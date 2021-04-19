@@ -1,1 +1,20 @@
-<p>create-album works!</p>
+<mat-card>
+    <img class="img" [src]="img || 'https://static.thenounproject.com/png/55431-200.png'" (click)="fileInput.click()"/>
+    <button [ngClass]="{'asterix--after': !img}" mat-button (click)="fileInput.click()">
+        <input #fileInput type="file" accept="image/*" capture="camera" (change)="onFileSelected($event)" style="display:none;" />
+        <mat-icon>insert_photo</mat-icon>
+        Choisir une image
+    </button>
+    <form [formGroup]="albumForm" (submit)="postAlbum()">
+        <mat-form-field appearance="fill">
+            <mat-label>Choisir un titre</mat-label>
+            <input matInput placeholder="Titre" formControlName="title" required>
+        </mat-form-field><br/>
+        <button mat-button color="accent" type="submit" [disabled]="!albumForm.valid || submitting || !img">
+            Créer l'Album
+            <mat-icon *ngIf="submitting"  style="margin-left: 10px;">
+                <mat-spinner [diameter]="20"></mat-spinner>
+            </mat-icon>
+        </button>
+    </form>
+</mat-card>

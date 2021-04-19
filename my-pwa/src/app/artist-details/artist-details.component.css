@@ -27,6 +27,10 @@
     margin-left: 75px;
 }
 
+.card-list {
+    padding-bottom: 20px;
+}
+
 @media (max-width: 599px) {
     .artists-infos {
         min-height: calc(100vh - 56px);

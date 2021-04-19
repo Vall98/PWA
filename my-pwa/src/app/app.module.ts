@@ -41,7 +41,6 @@ import { SoundcardComponent } from './soundcard/soundcard.component';
 import { AlbumcardComponent } from './albumcard/albumcard.component';
 import { PlaylistcardComponent } from './playlistcard/playlistcard.component';
 import { UploadSoundComponent } from './upload-sound/upload-sound.component';
-import { MySoundsComponent } from './my-sounds/my-sounds.component';
 import { CreateAlbumComponent } from './create-album/create-album.component';
 
 
@@ -61,7 +60,6 @@ import { CreateAlbumComponent } from './create-album/create-album.component';
     AlbumcardComponent,
     PlaylistcardComponent,
     UploadSoundComponent,
-    MySoundsComponent,
     CreateAlbumComponent
   ],
   imports: [
