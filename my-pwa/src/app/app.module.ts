@@ -69,7 +69,7 @@ import { AlbumDetailsComponent } from './album-details/album-details.component';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js',),//{ enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ScrollingModule,
     LayoutModule,
     FlexLayoutModule,
