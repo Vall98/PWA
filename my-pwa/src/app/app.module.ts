@@ -33,7 +33,6 @@ import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
-import { CameraComponent } from './camera/camera.component';
 import { SoundsComponent } from './sounds/sounds.component';
 import { DetailsComponent } from './sound-details/details.component';
 import { ArtistDetailsComponent } from './artist-details/artist-details.component';
@@ -42,6 +41,8 @@ import { SoundcardComponent } from './soundcard/soundcard.component';
 import { AlbumcardComponent } from './albumcard/albumcard.component';
 import { PlaylistcardComponent } from './playlistcard/playlistcard.component';
 import { UploadSoundComponent } from './upload-sound/upload-sound.component';
+import { MySoundsComponent } from './my-sounds/my-sounds.component';
+import { CreateAlbumComponent } from './create-album/create-album.component';
 
 
 @NgModule({
@@ -52,7 +53,6 @@ import { UploadSoundComponent } from './upload-sound/upload-sound.component';
     SigninComponent,
     SignupComponent,
     ProfileComponent,
-    CameraComponent,
     SoundsComponent,
     DetailsComponent,
     ArtistDetailsComponent,
@@ -60,7 +60,9 @@ import { UploadSoundComponent } from './upload-sound/upload-sound.component';
     SoundcardComponent,
     AlbumcardComponent,
     PlaylistcardComponent,
-    UploadSoundComponent
+    UploadSoundComponent,
+    MySoundsComponent,
+    CreateAlbumComponent
   ],
   imports: [
     BrowserModule,

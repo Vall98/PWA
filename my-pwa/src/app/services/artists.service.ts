@@ -11,17 +11,7 @@ export class ArtistsService {
 
   artists: Artist[] = [];
 
-  constructor(private http: HttpClient, private userService : UserService) { }
-
-  getHttpOptions() {
-    alert ("Retirer l'autentification pour les get");
-     return {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/x-www-form-urlencoded',
-        Authorization: 'Bearer ' + this.userService.token
-      })
-    };
-  }
+  constructor(private http: HttpClient) { }
 
   getArtistById(id: number): Artist | undefined {
     return this.artists.find(a => a.id === id);
@@ -29,10 +19,10 @@ export class ArtistsService {
 
   getAllArtists(): void {
     const url = environment.api + "users/"
-    this.http.get(url + "?ordering=username", this.getHttpOptions()).subscribe((data: any) => {
+    this.http.get(url + "?ordering=username").subscribe((data: any) => {
       this.artists = data.results;
       for (let a of this.artists) {
-        if (!a.profile_picture || a.profile_picture == "") a.profile_picture = "https://static.thenounproject.com/png/55431-200.png";
+        if (!a.profile_picture || a.profile_picture == "") a.profile_picture = "https://ts3.wondercube.fr/images/default_profile.png";
       }
     }, (err) => {
       alert(err.error);
@@ -43,7 +33,8 @@ export class ArtistsService {
 export class Artist {
   id: number = 0;
   username: String = "";
-  profile_picture: String = "https://static.thenounproject.com/png/55431-200.png";
+  profile_picture: String = "https://ts3.wondercube.fr/images/default_profile.png";
+  followers: number = 0;
   sounds: Sound[] = [];
   playlists: Playlist[] = [];
   albums: Album[] = [];

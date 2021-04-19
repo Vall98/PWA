@@ -13,13 +13,12 @@ import { Sound } from '../services/sounds.service';
 export class SoundsComponent implements OnInit {
   
   dataSource: Sound[] = [];
-  displayedColumns: string[] = ['id', 'title', 'file'];
+  displayedColumns: string[] = ['id', 'title', 'sound'];
 
   constructor(private http: HttpClient, private userService: UserService) {}
 
   ngOnInit(): void {
-    if (this.userService.token != "")
-      this.getSoundsList();
+    this.getSoundsList();
   }
 
   getSoundsList():void {

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { SoundsService, Style, Album } from '../services/sounds.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-upload-sound',
@@ -10,24 +11,22 @@ import { SoundsService, Style, Album } from '../services/sounds.service';
 export class UploadSoundComponent implements OnInit {
 
   styles: Style[] = [];
-  albums: Album[] = [];
   soundForm: FormGroup;
   file!: File;
 
   @ViewChild('fileInput')
   fileInput!: ElementRef;
 
-  constructor(private soundsService: SoundsService, private formBuilder: FormBuilder) {
+  constructor(private soundsService: SoundsService, private formBuilder: FormBuilder, public userService: UserService) {
     this.soundForm = this.formBuilder.group({
       Titre: [''],
       style: [''],
       album: [''],
-      });
-   }
+    });
+  }
 
   ngOnInit(): void {
     this.getStylesList();
-    this.getAlbumsList();
     this.initForm();
   }
 
@@ -47,11 +46,6 @@ export class UploadSoundComponent implements OnInit {
       .subscribe(data => this.styles = data.results);
   }
 
-  getAlbumsList():void {
-    this.soundsService.getAlbums()
-      .subscribe(data => this.albums = data.results);
-  }
-
   selectFile(): void {
     this.fileInput.nativeElement.click();
   }
@@ -60,6 +54,6 @@ export class UploadSoundComponent implements OnInit {
     const titre = this.soundForm.get('titre')?.value;
     const style = this.soundForm.get('style')?.value;
     const album = this.soundForm.get('album')?.value;
-    this.soundsService.PostSound(titre, style, album, this.file);
+    this.soundsService.postSound(titre, style, album, this.file);
   }
 }

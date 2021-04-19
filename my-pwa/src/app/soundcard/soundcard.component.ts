@@ -24,13 +24,18 @@ export class SoundcardComponent implements OnInit {
       this.sound = detail;
       const comments: Comment[] = detail.comments;
       this.comments.emit(comments);
+      this.albumPicture = this.sound.album?.picture || this.albumPicture;
       this.soundsService.getStyleByID(this.sound.style).subscribe(style => this.sound.style_name = style.name);
-      this.soundsService.getAlbumById(this.sound.album).subscribe(album => this.albumPicture = album.picture || this.albumPicture);
       this.artist = this.artistsService.getArtistById(this.sound.added_by) || this.artist;
     });
   }
 
-  LikeSound(){
-    this.soundsService.PostLikeSound(this.sound.id);
+  stopPropagation(event: any): void {
+    event.stopPropagation();
   }
+
+/*  likeSound(event: any): void {
+    event.stopPropagation();
+    this.soundsService.postLikeSound(this.sound.id);
+  }*/
 }

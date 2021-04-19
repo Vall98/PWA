@@ -3,7 +3,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Titre</mat-label>
             <input matInput>
-        </mat-form-field>
+        </mat-form-field><br/>
         <mat-form-field appearance="fill">
             <mat-label>Style</mat-label>
             <mat-select name="style">
@@ -11,12 +11,16 @@
                 {{style.name}}
                 </mat-option>
             </mat-select>
-        </mat-form-field>
+        </mat-form-field><br/>
         <mat-form-field appearance="fill">
             <mat-label>Album</mat-label>
             <mat-select name="album">
-                <mat-option *ngFor="let album of albums" [value]="album.id">
-                {{album.title}}
+                <mat-option [value]="-1">
+                    Creer un album
+                </mat-option>
+                <mat-divider></mat-divider>
+                <mat-option *ngFor="let album of userService.user.albums" [value]="album.id">
+                    {{album.title}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

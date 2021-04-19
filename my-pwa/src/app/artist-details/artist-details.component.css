@@ -1,0 +1,42 @@
+.artists-infos {
+    min-height: calc(100vh - 64px);
+    width: 100vw;
+    background-size: cover;
+    background-position-x: center;
+    background-attachment: fixed;
+}
+
+.artists-header {
+    margin-left: 100px;
+    padding-top: 40px;
+    padding-bottom: 30px;
+}
+
+.username {
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.followers {
+    font-size: 18px;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: bold;
+    margin-left: 75px;
+}
+
+@media (max-width: 599px) {
+    .artists-infos {
+        min-height: calc(100vh - 56px);
+    }
+
+    .artists-header {
+        margin-left: 10px;
+    }
+
+    .title {
+        margin-left: 10px;
+    }
+}
