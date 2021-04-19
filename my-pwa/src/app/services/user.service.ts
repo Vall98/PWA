@@ -92,6 +92,18 @@ export class UserService {
       console.log("Could not retrieve user info.");
     });
   }
+
+  follow(id: number): Observable<any> {
+    const url = environment.api + "users/" + id + "/follow/";
+    const httpOptions = this.getUserAuthHeader();
+    return this.http.post(url, {}, httpOptions);
+  }
+  
+  unfollow(id: number): Observable<any> {
+    const url = environment.api + "users/" + id + "/unfollow/";
+    const httpOptions = this.getUserAuthHeader();
+    return this.http.delete(url, httpOptions);
+  }
 }
 
 class User {
@@ -101,4 +113,9 @@ class User {
   profile_picture: string | ArrayBuffer = "";
   albums: Album[] = [];
   sounds: Sound[] = [];
+  user_followed: Followed[] = [];
+}
+
+export class Followed {
+  target: number = 0;
 }

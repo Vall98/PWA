@@ -1,22 +1,27 @@
-<div>
-    <img />
-    <h1>{{artist.username}}</h1><br />
-    <!--{{ artist.followers_count }}-->
-</div>
+<div class="artists-infos stroke-text" [style.background-image]="'url(' + artist.profile_picture + ')'">
+    <div class="artists-header">
+        <h1 class="username">{{artist.username}}</h1>
+        <div class="followers">
+            {{ artist.followers}} followers
+            <div *ngIf="userService.connected && artist.id != userService.user.id">
+                <button *ngIf="!isArtistFollowed()" mat-raised-button color="accent" (click)="follow()">Suivre</button>
+                <button *ngIf="isArtistFollowed()" mat-raised-button color="warn" (click)="unfollow()">Ne plus suivre</button>
+            </div>
+        </div>
+    </div>
 
-<div class="artists-infos" [style.background-image]="artist.profile_picture">
-
-</div>
-<div fxLayout="row wrap" fxLayoutAlign="space-around center">
-    <app-soundcard *ngFor="let sound of artist.sounds.slice(0,3)" [soundId]="sound.id"></app-soundcard>
-</div>
-
-bandeau Albums
-<div *ngFor="let album of artist.albums">
-    <app-albumcard [albumId]="album.id"></app-albumcard>
-</div>
-
-bandeau Playlist
-<div *ngFor="let playlist of artist.playlists">
-    <app-playlistcard [playlistId]="playlist.id"></app-playlistcard>
+    <h2 class="title" *ngIf="artist.sounds.length > 0">Ses Free-Sons</h2>
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+        <app-soundcard *ngFor="let sound of artist.sounds.slice(0,3)" [soundId]="sound.id"></app-soundcard>
+    </div>
+    
+    <!--h2 class="title" *ngIf="artist.albums.length > 0">Ses Albums</h2>
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+        <app-albumcard *ngFor="let album of artist.albums" [albumId]="album.id"></app-albumcard>
+    </div-->
+    
+    <h2 class="title" *ngIf="artist.playlists.length > 0">Ses Playlists</h2>
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+        <app-playlistcard *ngFor="let playlist of artist.playlists" [playlistId]="playlist.id"></app-playlistcard>
+    </div>
 </div>
