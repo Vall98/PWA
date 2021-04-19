@@ -24,7 +24,7 @@ export class AlbumcardComponent implements OnInit {
       if (!this.album.picture || this.album.picture == "") this.album.picture = "https://static.thenounproject.com/png/55431-200.png";
       const sounds: Sound[] = album.sounds;
       this.sounds.emit(sounds);
-      //this.artist = this.artistsService.getArtistById(this.album.added_by) || this.artist;
+      this.artist = this.artistsService.getArtistById(this.album.added_by) || this.artist;
     });
   }
 

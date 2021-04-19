@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AlbumDetailsComponent } from './album-details/album-details.component';
 import { ArtistDetailsComponent } from './artist-details/artist-details.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'details/:id', component: DetailsComponent },
   { path: 'upload', component: UploadSoundComponent },
   { path: 'artist/:id',  component: ArtistDetailsComponent },
+  { path: 'album/:id',  component: AlbumDetailsComponent },
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: '**', redirectTo: '' }
 ];

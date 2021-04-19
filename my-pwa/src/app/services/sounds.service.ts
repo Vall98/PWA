@@ -99,6 +99,8 @@ export class Album {
   id: number = 0;
   title: string = "";
   picture: string = "";
+  added_by: number = 0;
+  sounds: Sound[] = [];
 }
 
 export class Playlist {
