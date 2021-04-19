@@ -6,8 +6,6 @@
         <a class="logo-title">Free-sons</a>
       </button>
       <span class="spacer"></span>
-      <app-artists-search></app-artists-search>
-      <span class="spacer"></span>
       <div *ngIf="userService.connected">
         <button mat-button [matMenuTriggerFor]="profile">
           <mat-icon>account_circle</mat-icon>
@@ -16,7 +14,6 @@
         <mat-menu #profile="matMenu">
           <button mat-menu-item routerLink="/upload">Mettre un son en ligne</button>
           <button mat-menu-item [routerLink]="'/artist/' + userService.user.id">Mes Free-sons</button>
-          <button mat-menu-item>Mes playlists</button>
           <mat-divider></mat-divider>
           <button mat-menu-item routerLink="/profile">
             <mat-icon>manage_accounts</mat-icon>

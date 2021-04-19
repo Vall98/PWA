@@ -2,10 +2,10 @@ const express = require('express');
 
 const app = express();
 
-app.use(express.static('./dist/my-pwa'));
+app.use(express.static('./dist/free-sons'));
 
 app.get('/*', function (req, res) {
-  res.sendFile('index.html', { root: 'dist/my-pwa' }
+  res.sendFile('index.html', { root: 'dist/free-sons' }
   );
 });
 

@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Album, Playlist, Sound } from './sounds.service';
-import { UserService } from './user.service';
+import { Album, Sound } from './sounds.service';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +35,5 @@ export class Artist {
   profile_picture: String = "https://ts3.wondercube.fr/images/default_profile.png";
   followers: number = 0;
   sounds: Sound[] = [];
-  playlists: Playlist[] = [];
   albums: Album[] = [];
 }
