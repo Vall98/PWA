@@ -26,5 +26,19 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "profile",
+      "urls": [
+        "/profile"
+      ],
+      "cacheConfig": {
+        "maxSize": 1,
+        "maxAge": "7d",
+        "timeout": "0u",
+        "strategy": "freshness"
+      }
+    }
   ]
 }
