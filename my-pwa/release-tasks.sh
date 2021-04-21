@@ -7,6 +7,13 @@ export const environment = {
   api_token: "$BACKEND_API_TOKEN"
 }
 EOF
+cat > src/environments/environment.ts <<EOF
+export const environment = {
+  api: "https://free-sons-backend.herokuapp.com/",
+  production: true,
+  api_token: "$BACKEND_API_TOKEN"
+}
+EOF
 cat > src/firebase-config.js <<EOF
 const firebaseConfig = {
   apiKey: "$FIREBASE_API_TOKEN",
