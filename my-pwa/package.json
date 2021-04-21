@@ -14,7 +14,7 @@
     "start:prod": "node server.ts",
     "dev:ssr": "ng run free-sons:serve-ssr",
     "serve:ssr": "node dist/free-sons/server/main.js",
-    "build:ssr": "./release-tasks.sh && ng build --prod --source-map && ng run free-sons:server:production",
+    "build:ssr": "ng build --prod --source-map && ng run free-sons:server:production",
     "prerender": "ng run free-sons:prerender"
   },
   "preinstall": "./release-tasks.sh",
