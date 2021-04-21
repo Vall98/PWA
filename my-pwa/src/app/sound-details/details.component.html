@@ -1,3 +1,27 @@
-<div class="cardo">
-    <app-soundcard [soundId]="soundId" (comments)="displayComments($event)"></app-soundcard>
+<div class="details">
+    <div class="cardo">
+        <app-soundcard style="margin: auto;" [soundId]="soundId" (comments)="displayComments($event)"></app-soundcard>
+    </div>
+    <div class="comments">
+        <form [formGroup]="commentForm" (submit)="leaveComment()">
+            <div class="comment-input">
+                <mat-form-field appearance="fill">
+                    <mat-label>Laisser un commentaire</mat-label>
+                    <textarea matInput placeholder="Votre commentaire" formControlName="comment" required></textarea>
+                    <button mat-button color="accent" type="submit" [disabled]="!commentForm.valid || submitting" block>Poster</button>
+                </mat-form-field>
+            </div>
+        </form>
+        <mat-label *ngIf="comments && comments.length == 0">
+            <h2 *ngIf="userService.connected">Laissez le premier commentaire !</h2>
+            <h2 *ngIf="!userService.connected">Connectez vous pour laisser un commentaire !</h2>
+        </mat-label>
+        <mat-card [id]="comment.id" *ngFor="let comment of comments">
+            <mat-card-header>
+                <mat-card-title>{{ comment.post_by }}</mat-card-title>
+                <mat-card-subtitle>{{ comment.added_on | date:'dd/MM/yyyy'}} at {{ comment.added_on | date:'HH:mm'}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>{{ comment.message }}</mat-card-content>
+        </mat-card>
+    </div>
 </div>

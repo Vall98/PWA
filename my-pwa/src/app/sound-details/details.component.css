@@ -1,8 +1,43 @@
+.details {
+  min-height: calc(100vh - 64px);
+  padding-bottom: 50px;
+}
 
 .cardo {
-  height: calc(100vh - 64px);
-  width: auto;
+  padding-top: calc((100vh - 64px - 524px) / 2);
   display: flex;
-  justify-content: center;
-  align-items: center;
+}
+
+.comments {
+  padding-left: 100px;
+  padding-right: 100px;
+  width: calc(100vw - 200px);
+}
+
+.comment-input {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+textarea {
+  width: calc(100% - 74px);
+}
+
+@media (max-width: 599px) {
+  .details {
+    min-height: calc(100vh - 56px);
+  }
+
+  .cardo {
+    padding-top: calc((100vh - 56px - 524px) / 2);
+  }
+
+  .comments {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: calc(100vw - 20px);
+  }
 }

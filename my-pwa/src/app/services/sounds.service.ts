@@ -68,6 +68,12 @@ export class SoundsService {
     formData.append('picture', fileInput, fileInput.name);
     return this.http.post(url, formData, this.userService.getUserAuthHeaderFileTransfer());
   }
+
+  postComment(id: number, comment: string): Observable<any> {
+    const url = environment.api + 'sounds/' + id + "/comment/ ";
+    let body = "message=" + comment;
+    return this.http.post(url, body, this.userService.getUserAuthHeader());
+  }
 }
 
 export class Sound {
@@ -85,8 +91,8 @@ export class Sound {
 
 export class Comment {
   id: number = 0;
-  sound: string = "";
   post_by: string = "";
+  added_on: string = "";
   message: string = "";
 }
 

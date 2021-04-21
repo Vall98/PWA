@@ -14,25 +14,29 @@ export class UserService {
   token: String = "";
 
   constructor(private http: HttpClient) {
-    this.connectFromToken();
   }
 
-  private connectFromToken(): void {
-    const token = this.retrieveToken();
-    if (token == null) {
-      return;
-    }
-    this.token = token;
-    const url = environment.api + "profile/"
-    const httpOptions = this.getUserAuthHeader();
-    this.http.get(url, httpOptions).subscribe((data: any) => {
-      this.user = data;
-      this.connected = true;
-      if (!this.user.profile_picture || this.user.profile_picture == "") {
-        this.user.profile_picture = "https://ts3.wondercube.fr/images/default_profile.png";
+  connectFromToken(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const token = this.retrieveToken();
+      if (token == null) {
+        reject("Token is null");
+        return;
       }
-    }, (err) => {
-      this.token = "";
+      this.token = token;
+      const url = environment.api + "profile/"
+      const httpOptions = this.getUserAuthHeader();
+      this.http.get(url, httpOptions).subscribe((data: any) => {
+        this.user = data;
+        this.connected = true;
+        if (!this.user.profile_picture || this.user.profile_picture == "") {
+          this.user.profile_picture = "https://ts3.wondercube.fr/images/default_profile.png";
+        }
+        resolve(data);
+      }, (err) => {
+        this.token = "";
+        reject(err);
+      });
     });
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DeviceService } from '../services/device.service';
 import { UserService } from '../services/user.service';
 import { SigninComponent } from '../signin/signin.component';
 
@@ -18,7 +19,7 @@ export class SignupComponent implements OnInit {
   hideConfirm: boolean = true;
   formErr: any = {};
 
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<SignupComponent>, public userService: UserService) {
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<SignupComponent>, public userService: UserService, private deviceService: DeviceService) {
     this.signupForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', Validators.email],
@@ -48,6 +49,8 @@ export class SignupComponent implements OnInit {
       this.userService.signin(username.value, password.value).subscribe((data) => {
         this.userService.token = data.access_token;
         this.userService.updateLocalUserInfo();
+        this.userService.connected = true;
+        this.deviceService.registerToken();
         this.dialogRef.close();
         this.submitting = false;
       });

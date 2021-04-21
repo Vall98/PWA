@@ -22,12 +22,16 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table'
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { environment } from '../environments/environment';
 import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './signin/signin.component';
@@ -43,6 +47,10 @@ import { UploadSoundComponent } from './upload-sound/upload-sound.component';
 import { CreateAlbumComponent } from './create-album/create-album.component';
 import { AlbumDetailsComponent } from './album-details/album-details.component';
 
+import firebase from 'firebase/app';
+import 'firebase/messaging';
+
+firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [
@@ -64,12 +72,14 @@ import { AlbumDetailsComponent } from './album-details/album-details.component';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    ServiceWorkerModule.register('combined-sw.js', { enabled: true, registrationStrategy: 'registerImmediately' }),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireMessagingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ScrollingModule,
     LayoutModule,
     FlexLayoutModule,
@@ -89,7 +99,9 @@ import { AlbumDetailsComponent } from './album-details/album-details.component';
     MatCardModule,
     MatTableModule,
     MatAutocompleteModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

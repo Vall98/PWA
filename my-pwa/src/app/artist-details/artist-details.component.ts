@@ -27,7 +27,6 @@ export class ArtistDetailsComponent implements OnInit {
     let user: Followed | undefined = this.userService.user?.user_followed.find(obj => {
       return obj.target === this.artist.id;
     })
-    console.log(user);
     return user != undefined;
   }
 

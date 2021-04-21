@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DeviceService } from '../services/device.service';
 import { UserService } from '../services/user.service';
 import { SignupComponent } from '../signup/signup.component';
 
@@ -16,7 +17,7 @@ export class SigninComponent implements OnInit {
   hidePassword: boolean = true;
   error: String | undefined;
 
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<SigninComponent>, private userService: UserService) {
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<SigninComponent>, private userService: UserService, private deviceService: DeviceService) {
     this.signinForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -35,6 +36,8 @@ export class SigninComponent implements OnInit {
       this.userService.token = data.access_token;
       this.userService.updateLocalUserInfo();
       this.userService.saveToken(data.access_token);
+      this.userService.connected = true;
+      this.deviceService.registerToken();
       this.dialogRef.close();
       this.submitting = false;
     }, (err) => {

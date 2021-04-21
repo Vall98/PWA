@@ -15,6 +15,10 @@
           <button mat-menu-item routerLink="/upload">Mettre un son en ligne</button>
           <button mat-menu-item [routerLink]="'/artist/' + userService.user.id">Mes Free-sons</button>
           <mat-divider></mat-divider>
+          <button mat-menu-item>
+            <mat-slide-toggle color="accent" [(ngModel)]="notifications" (click)="stopPropagation($event)" (change)="notifToggle($event)">Notifications</mat-slide-toggle>
+          </button>
+          <mat-divider></mat-divider>
           <button mat-menu-item routerLink="/profile">
             <mat-icon>manage_accounts</mat-icon>
             Gérer mon profil
