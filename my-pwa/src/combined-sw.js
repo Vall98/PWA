@@ -7,10 +7,21 @@ firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 
+var test = {};
+
+messaging.onBackgroundMessage((payload) => {
+    console.log(payload);
+});
+
 messaging.setBackgroundMessageHandler((payload) => {
+    console.log(payload);
+    test = payload;
     const notificationOptions = {
-        body: payload.message,
-        icon: 'assets/img/mstile-150x150.png'
+        badge: 'assets/icons/icon-144x144.png',
+        body: payload.message.notification.body,
+        data: payload.message.data,
+        icon: 'assets/icons/icon-512x512.png',
+        image: 'assets/icons/icon-512x512.png'
     };
-    return self.registration.showNotification("Morphistic", notificationOptions);
+    return self.registration.showNotification(payload.message.notification.title, notificationOptions);
 });

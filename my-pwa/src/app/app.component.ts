@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { DeviceService } from './services/device.service';
+import { DeviceService, Notification } from './services/device.service';
 import firebase from 'firebase/app';
 import 'firebase/messaging';
-import { environment } from 'src/environments/environment';
 import { SwPush, SwUpdate } from '@angular/service-worker';
-import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +14,7 @@ export class AppComponent {
 
   messaging: firebase.messaging.Messaging;
 
-  constructor(private deviceService: DeviceService, swPush: SwPush, updates: SwUpdate, private userService: UserService) {
+  constructor(private deviceService: DeviceService, swPush: SwPush, updates: SwUpdate) {
     updates.available.subscribe(event => {
       console.log('current version is', event.current);
       console.log('available version is', event.available);
@@ -28,10 +26,16 @@ export class AppComponent {
     });
   
     swPush.messages.subscribe((notification: any) => {
-      this.deviceService.notificationAlert(notification.notification);
+      this.deviceService.notificationAlert(notification);
     });
-    swPush.notificationClicks.subscribe((click) => {
-      this.deviceService.notificationClick(click);
+    swPush.notificationClicks.subscribe((click: any) => {
+      console.log(click);
+      console.log(click.data);
+      const notif: Notification = {
+        notification: click.notification,
+        data: click.data.FCM_MSG.data
+      }
+      this.deviceService.notificationClick(notif);
     });
 
     this.messaging = firebase.messaging();
@@ -42,6 +46,6 @@ export class AppComponent {
         this.deviceService.token = token;
         this.deviceService.registerToken();
       });
-  });
+    });
   }
 }

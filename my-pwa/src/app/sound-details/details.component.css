@@ -26,6 +26,11 @@ textarea {
   width: calc(100% - 74px);
 }
 
+.header-image {
+  background-size: cover;
+  background-position: center
+}
+
 @media (max-width: 599px) {
   .details {
     min-height: calc(100vh - 56px);

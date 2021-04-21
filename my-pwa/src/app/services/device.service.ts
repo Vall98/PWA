@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { not } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
 
@@ -13,7 +12,7 @@ export class DeviceService {
 
   token: String | undefined;
 
-  constructor(private http: HttpClient, private userService: UserService, private snackBar: MatSnackBar) {
+  constructor(private http: HttpClient, private router: Router, private userService: UserService, private snackBar: MatSnackBar) {
     if (localStorage.getItem('notification_active') == null) {
       //get from API
       this.saveNotification(true);
@@ -55,14 +54,23 @@ export class DeviceService {
     this.sendToken(false);
   }
 
-  notificationClick(notification: any): void {
+  notificationClick(notification: Notification): void {
     console.log(notification);
+    if (notification.data.route) {
+      this.router.navigateByUrl(notification.data.route);
+    }
   }
 
-  notificationAlert(notification: any): void {
-    const sbRef = this.snackBar.open(notification.title + " " + notification.body, "Voir");
+  notificationAlert(notification: Notification): void {
+    console.log(notification);
+    const sbRef = this.snackBar.open(notification.notification.title + ": " + notification.notification.body, "Voir");
     sbRef.onAction().subscribe(() => {
       this.notificationClick(notification);
     });
   }
+}
+
+export interface Notification {
+  notification: { title: string, body: string };
+  data: { route: string };
 }
