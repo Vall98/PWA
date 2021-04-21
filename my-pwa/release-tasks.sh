@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cat > src/environments/environment.prod.ts <<EOF
 export const environment = {
   api: "https://free-sons-backend.herokuapp.com/",
