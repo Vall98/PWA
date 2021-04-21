@@ -22,7 +22,7 @@
       "resources": {
         "files": [
           "/assets/**",
-          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+          "/*.(eot|svg|cur|jpeg|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }
     }
@@ -51,7 +51,7 @@
       "cacheConfig": {
         "maxSize": 100,
         "maxAge": "3d",
-        "strategy": "performance"
+        "strategy": "freshness"
       }
     }
   ]

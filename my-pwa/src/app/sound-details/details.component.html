@@ -1,4 +1,4 @@
-<div class="details">
+<div #details class="details">
     <div class="cardo">
         <app-soundcard style="margin: auto;" [soundId]="soundId" (comments)="displayComments($event)"></app-soundcard>
     </div>
@@ -18,7 +18,8 @@
         </mat-label>
         <mat-card [id]="comment.id" *ngFor="let comment of comments">
             <mat-card-header>
-                <mat-card-title>{{ comment.post_by }}</mat-card-title>
+                <div mat-card-avatar class="header-image" (click)="stopPropagation($event)" [routerLink]="'/artist/' + comment.post_by" [style.background-image]="'url(' + getArtistPicture(comment.post_by) + ')'"></div>
+                <mat-card-title>{{ getArtistName(comment.post_by) }}</mat-card-title>
                 <mat-card-subtitle>{{ comment.added_on | date:'dd/MM/yyyy'}} at {{ comment.added_on | date:'HH:mm'}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>{{ comment.message }}</mat-card-content>
