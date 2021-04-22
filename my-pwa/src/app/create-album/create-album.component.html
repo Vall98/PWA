@@ -10,7 +10,8 @@
             <mat-label>Choisir un titre</mat-label>
             <input matInput placeholder="Titre" formControlName="title" required>
         </mat-form-field><br/>
-        <button mat-button color="accent" type="submit" [disabled]="!albumForm.valid || submitting || !img">
+        <button mat-button color="accent" type="submit" [disabled]="!albumForm.valid || submitting || !img || !connectionService.online">
+            <mat-icon *ngIf="!connectionService.online">wifi_off</mat-icon>
             Créer l'Album
             <mat-icon *ngIf="submitting"  style="margin-left: 10px;">
                 <mat-spinner [diameter]="20"></mat-spinner>

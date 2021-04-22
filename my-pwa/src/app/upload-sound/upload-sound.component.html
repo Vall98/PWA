@@ -62,7 +62,8 @@
     <mat-step>
         <ng-template matStepLabel>Terminer</ng-template>
         <div>
-            <button mat-button color="accent" (click)="postSound()" [disabled]="submitting">
+            <button mat-button color="accent" (click)="postSound()" [disabled]="submitting || !connectionService.online">
+                <mat-icon *ngIf="!connectionService.online">wifi_off</mat-icon>
                 Upload le son
                 <mat-icon *ngIf="submitting" style="margin-left: 10px;">
                     <mat-spinner [diameter]="20"></mat-spinner>

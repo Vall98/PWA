@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ConnectionService } from '../services/connection.service';
 import { SoundsService } from '../services/sounds.service';
 import { UserService } from '../services/user.service';
 
@@ -16,7 +17,8 @@ export class CreateAlbumComponent implements OnInit {
   imgFile: File | undefined;
   submitting: boolean = false;
 
-  constructor(private soundsService: SoundsService, private formBuilder: FormBuilder, private userService: UserService, private dialogRef: MatDialogRef<CreateAlbumComponent>) {
+  constructor(private soundsService: SoundsService, private formBuilder: FormBuilder, private userService: UserService,
+    private dialogRef: MatDialogRef<CreateAlbumComponent>, public connectionService: ConnectionService) {
     this.albumForm = this.formBuilder.group({
       title: ['']
     });

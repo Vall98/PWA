@@ -12,21 +12,39 @@
           {{ userService.user.username }}
         </button>
         <mat-menu #profile="matMenu">
-          <button mat-menu-item routerLink="/upload">Mettre un son en ligne</button>
-          <button mat-menu-item [routerLink]="'/artist/' + userService.user.id">Mes Free-sons</button>
-          <mat-divider></mat-divider>
-          <button mat-menu-item>
-            <mat-slide-toggle color="accent" [(ngModel)]="notifications" (click)="stopPropagation($event)" (change)="notifToggle($event)">Notifications</mat-slide-toggle>
+          <button *ngIf="connectionService.online" mat-menu-item routerLink="/upload">
+            <mat-icon>upload</mat-icon>
+            Mettre un son en ligne
+          </button>
+          <button *ngIf="!connectionService.online" (click)="stopPropagation($event)" mat-menu-item>
+            <mat-icon>wifi_off</mat-icon>
+            Mettre un son en ligne
+          </button>
+          <button mat-menu-item [routerLink]="'/artist/' + userService.user.id">
+            <mat-icon>library_music</mat-icon>
+            Mes Free-sons
           </button>
           <mat-divider></mat-divider>
-          <button mat-menu-item routerLink="/profile">
+          <button *ngIf="connectionService.online" mat-menu-item>
+            <mat-slide-toggle color="accent" [(ngModel)]="notifications" (click)="stopPropagation($event)" (change)="notifToggle($event)">Notifications</mat-slide-toggle>
+          </button>
+          <button *ngIf="!connectionService.online" (click)="stopPropagation($event)" mat-menu-item>
+            <mat-icon>wifi_off</mat-icon>
+            Notifications
+          </button>
+          <mat-divider></mat-divider>
+          <button *ngIf="connectionService.online"  mat-menu-item routerLink="/profile">
             <mat-icon>manage_accounts</mat-icon>
+            Gérer mon profil
+          </button>
+          <button *ngIf="!connectionService.online" (click)="stopPropagation($event)" mat-menu-item>
+            <mat-icon>wifi_off</mat-icon>
             Gérer mon profil
           </button>
         </mat-menu>
       </div>
       <div *ngIf="!userService.connected">
-        <button mat-button (click)="signin()">
+        <button *ngIf="connectionService.online" (click)="signin()" mat-menu-item>
           <mat-icon>account_circle</mat-icon>
           Connexion
         </button>
