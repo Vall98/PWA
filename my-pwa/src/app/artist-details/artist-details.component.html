@@ -1,7 +1,7 @@
 <div class="artists-infos stroke-text" [style.background-image]="'url(' + artist.profile_picture + ')'">
     <div class="artists-header">
         <h1 class="username">{{artist.username}}</h1>
-        <div class="followers">
+        <div *ngIf="!noFollow" class="followers">
             {{ artist.followers}} followers
             <div *ngIf="userService.connected && artist.id != userService.user.id">
                 <button *ngIf="!isArtistFollowed()" mat-raised-button color="accent" (click)="follow()">Suivre</button>

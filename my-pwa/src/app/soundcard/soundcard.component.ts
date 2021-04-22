@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Artist, ArtistsService } from '../services/artists.service';
 import { Comment, Sound, SoundsService } from '../services/sounds.service';
 
@@ -7,7 +7,7 @@ import { Comment, Sound, SoundsService } from '../services/sounds.service';
   templateUrl: './soundcard.component.html',
   styleUrls: ['./soundcard.component.css']
 })
-export class SoundcardComponent implements OnInit {
+export class SoundcardComponent implements OnInit, OnChanges {
   @Input() soundId: number | undefined;
   @Output() comments = new EventEmitter<Comment[]>();
 
@@ -27,15 +27,17 @@ export class SoundcardComponent implements OnInit {
       this.albumPicture = this.sound.album?.picture || this.albumPicture;
       this.soundsService.getStyleByID(this.sound.style).subscribe(style => this.sound.style_name = style.name);
       this.artist = this.artistsService.getArtistById(this.sound.added_by) || this.artist;
+    }, (err) => {
+      this.sound.title = "404";
+      this.albumPicture = "https://blog.natro.com/wp-content/uploads/2019/12/404-hata-sayfasi.jpg";
     });
+  }
+
+  ngOnChanges() {
+    this.ngOnInit();
   }
 
   stopPropagation(event: any): void {
     event.stopPropagation();
   }
-
-/*  likeSound(event: any): void {
-    event.stopPropagation();
-    this.soundsService.postLikeSound(this.sound.id);
-  }*/
 }

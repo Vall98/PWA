@@ -15,27 +15,12 @@ export class SoundsComponent implements OnInit {
   dataSource: Sound[] = [];
   displayedColumns: string[] = ['id', 'title', 'sound'];
 
-  constructor(private http: HttpClient, private userService: UserService) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.getSoundsList();
-  }
-
-  getSoundsList():void {
-    this.getSounds()
-      .subscribe(sounds => this.dataSource = sounds.results);
-  }
-
-  getSounds():Observable<any>{
     const url = environment.api + 'sounds/';
-    const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/x-www-form-urlencoded',
-          Authorization: 'Bearer ' + this.userService.token
-        })
-      };
-
-    return this.http.get<Sound[]>(url, httpOptions);
+    this.http.get(url).subscribe((sounds: any) => {
+      this.dataSource = sounds.results;
+    });
   }
-
 }

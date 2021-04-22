@@ -10,8 +10,7 @@ import { UserService } from '../services/user.service';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
-export class DetailsComponent implements OnInit, OnDestroy, AfterContentChecked {
-  @ViewChild('details') content: ElementRef | undefined;
+export class DetailsComponent implements OnInit, AfterContentChecked {
 
   soundId: number;
   scrollId: string | undefined;
@@ -20,21 +19,20 @@ export class DetailsComponent implements OnInit, OnDestroy, AfterContentChecked 
   commentForm: FormGroup;
   submitting: boolean = false;
 
-  constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder,
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder,
     public userService: UserService, private soundsService: SoundsService, private artistsService: ArtistsService) {
     this.soundId = Number(this.route.snapshot.paramMap.get('id'));
-    this.scrollId = this.route.snapshot.fragment;
     this.commentForm = this.formBuilder.group({
       comment: ['']
     });
   }
   
   ngOnInit(): void {
-    this.router.onSameUrlNavigation = 'reload';
-  }
-  
-  ngOnDestroy(): void {
-    this.router.onSameUrlNavigation = 'ignore';
+    this.route.params.subscribe((params) => {
+      this.commentForm.setValue({comment: ""});
+      this.soundId = Number(params['id']);
+      this.scrollId = this.route.snapshot.fragment;
+    });
   }
 
   ngAfterContentChecked() {
@@ -49,11 +47,8 @@ export class DetailsComponent implements OnInit, OnDestroy, AfterContentChecked 
   }
 
   scrollTo(element: string): void {
-    const nav = document.getElementById('details');
     const com = document.getElementById(element);
-    if (com == null || nav == null) return;
-    let yOffset = com.getBoundingClientRect().top - nav.getBoundingClientRect().top;
-    if (this.content) this.content.nativeElement.scrollTop = 1000;
+    com?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
 
   leaveComment(): void {

@@ -7,21 +7,38 @@ firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 
-var test = {};
-
-messaging.onBackgroundMessage((payload) => {
-    console.log(payload);
+//Call only on "data messages", not on "notification messages", i.e., notification payload needs to be empty
+//Show the desktop alert (if closed / in background)
+messaging.setBackgroundMessageHandler((payload) => {
+  console.log(payload);
+  //We could define notificationOptions.data to data but this function is not called while in foreground.
+  const data = JSON.parse(payload.data.data);
+  console.log(data);
+  const notificationOptions = {
+    badge: 'assets/icons/icon-144x144.png',
+    body: data.body,
+    data: payload.data,
+    icon: 'assets/icons/icon-512x512.png',
+    image: 'assets/icons/icon-512x512.png'
+  };
+  //Trigger swPush.messages
+  return self.registration.showNotification(data.title, notificationOptions);
 });
 
-messaging.setBackgroundMessageHandler((payload) => {
-    console.log(payload);
-    test = payload;
-    const notificationOptions = {
-        badge: 'assets/icons/icon-144x144.png',
-        body: payload.message.notification.body,
-        data: payload.message.data,
-        icon: 'assets/icons/icon-512x512.png',
-        image: 'assets/icons/icon-512x512.png'
-    };
-    return self.registration.showNotification(payload.message.notification.title, notificationOptions);
+//Called as the same time as swPush.notificationClicks
+self.addEventListener('notificationclick', event => {
+  const rootUrl = new URL('/', location).href;
+  event.notification.close();
+  // Enumerate windows, and call window.focus(), or open a new one.
+  event.waitUntil(
+    clients.matchAll().then(matchedClients => {
+      for (let client of matchedClients) {
+        if (client.url === rootUrl) {
+          return client.focus();
+        }
+      }
+      const data = JSON.parse(event.notification.data.data);
+      return clients.openWindow(data.route || "/");
+    })
+  );
 });
