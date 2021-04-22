@@ -25,9 +25,7 @@ export class ArtistsSearchComponent implements OnInit {
     return this.artistsService.artists.filter(option => option.username.toLowerCase().indexOf(value.toLowerCase()) === 0);
   }
 
-  ngOnInit(): void {
-    this.artistsService.getAllArtists();
-  }
+  ngOnInit(): void {}
 
   search(): void {
     //get id

@@ -11,14 +11,22 @@ import { UserService, Followed } from '../services/user.service';
 export class ArtistDetailsComponent implements OnInit {
 
   artist: Artist = new Artist();
+  artist404: Artist = new Artist();
+  noFollow: boolean = false;
 
   constructor(private route: ActivatedRoute, private artistsService: ArtistsService, public userService: UserService) {
+    this.artist404.username = "404";
+    this.artist404.profile_picture = "https://blog.natro.com/wp-content/uploads/2019/12/404-hata-sayfasi.jpg";
   }
   
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       let id = Number(params['id']);
-      this.artist = this.artistsService.getArtistById(id) || this.artist;
+      this.artistsService.getAllArtistsObservable.subscribe((data) => {
+        const a = this.artistsService.getArtistById(id);
+        this.artist = a || this.artist404;
+        if (a == undefined) this.noFollow = true;
+      });
     });
   }
 

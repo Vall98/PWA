@@ -36,22 +36,52 @@
       "cacheConfig": {
         "maxSize": 1,
         "maxAge": "7d",
-        "timeout": "0u",
         "strategy": "freshness"
       }
     },
     {
       "name": "sounds",
       "urls": [
-        "/users/**",
-        "/sounds/**",
-        "/albums/**",
-        "/styles/**"
+        "/sounds/*/**"
       ],
       "cacheConfig": {
         "maxSize": 100,
         "maxAge": "3d",
         "strategy": "freshness"
+      }
+    },
+    {
+      "name": "artists",
+      "urls": [
+        "/users/**"
+      ],
+      "cacheConfig": {
+        "maxSize": 50,
+        "maxAge": "1d",
+        "strategy": "performance"
+      }
+    },
+    {
+      "name": "sounds-list",
+      "urls": [
+        "/sounds/",
+        "/albums/**"
+      ],
+      "cacheConfig": {
+        "maxSize": 100,
+        "maxAge": "1d",
+        "strategy": "performance"
+      }
+    },
+    {
+      "name": "styles",
+      "urls": [
+        "/styles/**"
+      ],
+      "cacheConfig": {
+        "maxSize": 1,
+        "maxAge": "3d",
+        "strategy": "performance"
       }
     }
   ]

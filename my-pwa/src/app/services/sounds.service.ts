@@ -31,11 +31,6 @@ export class SoundsService {
     return this.http.get(url);
   }
 
-  getAlbums(): Observable<any>{
-    const url = environment.api + 'albums/';
-    return this.http.get(url);
-  }
-
 /*  postLikeSound(id: number): void{
     const url = environment.api + 'sounds/' + id + '/like/';
     const httpOptions = {

@@ -14,8 +14,7 @@ export class NavbarComponent {
 
   notifications: boolean;
 
-  constructor(public userService: UserService, public dialog: MatDialog, private router: Router, public deviceService: DeviceService) {
-    this.router.navigateByUrl("/");
+  constructor(public userService: UserService, public dialog: MatDialog, public deviceService: DeviceService) {
     this.notifications = this.deviceService.retrieveNotification();
   }
 

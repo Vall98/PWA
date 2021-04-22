@@ -3,7 +3,7 @@
         <h1 class="username">{{album.title}}</h1>
     </div>
 
-    <div class="sounds">
+    <div *ngIf="found" class="sounds">
         <h2 class="title">Par {{artistsService.getArtistById(album.added_by)?.username}}</h2>
         <div class="card-list" fxLayout="row wrap" fxLayoutAlign="space-around center">
             <app-soundcard *ngFor="let sound of album.sounds" [soundId]="sound.id"></app-soundcard><!--.slice(0,3)-->

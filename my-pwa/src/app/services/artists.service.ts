@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Album, Sound } from './sounds.service';
 
@@ -9,16 +10,19 @@ import { Album, Sound } from './sounds.service';
 export class ArtistsService {
 
   artists: Artist[] = [];
+  getAllArtistsObservable: Observable<any>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const url = environment.api + "users/";
+    this.getAllArtistsObservable = this.http.get(url + "?ordering=username");
+  }
 
   getArtistById(id: number): Artist | undefined {
     return this.artists.find(a => a.id === id);
   }
 
   getAllArtists(): void {
-    const url = environment.api + "users/"
-    this.http.get(url + "?ordering=username").subscribe((data: any) => {
+    this.getAllArtistsObservable.subscribe((data: any) => {
       this.artists = data.results;
       for (let a of this.artists) {
         if (!a.profile_picture || a.profile_picture == "") a.profile_picture = "https://ts3.wondercube.fr/images/default_profile.png";

@@ -3,6 +3,7 @@ import { DeviceService, Notification } from './services/device.service';
 import firebase from 'firebase/app';
 import 'firebase/messaging';
 import { SwPush, SwUpdate } from '@angular/service-worker';
+import { ArtistsService } from './services/artists.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,10 @@ export class AppComponent {
 
   messaging: firebase.messaging.Messaging;
 
-  constructor(private deviceService: DeviceService, swPush: SwPush, updates: SwUpdate) {
+  constructor(private deviceService: DeviceService, swPush: SwPush, updates: SwUpdate, private artistsService: ArtistsService) {
+    
+    this.initApp();
+
     updates.available.subscribe(event => {
       console.log('current version is', event.current);
       console.log('available version is', event.available);
@@ -26,12 +30,16 @@ export class AppComponent {
     });
   
     swPush.messages.subscribe((notification: any) => {
+      notification.data = JSON.parse(notification.data.data);
+      notification.title = notification.data.title;
+      notification.body = notification.data.body;
+      console.log(notification);
       this.deviceService.notificationAlert(notification);
     });
     swPush.notificationClicks.subscribe((click: any) => {
-      console.log(click);
-      console.log(click.data);
-      this.deviceService.notificationClick(click);
+      click.notification.data = JSON.parse(click.notification.data.data);
+      console.log(click.notification);
+      this.deviceService.notificationClick(click.notification);
     });
 
     this.messaging = firebase.messaging();
@@ -43,5 +51,9 @@ export class AppComponent {
         this.deviceService.registerToken();
       });
     });
+  }
+
+  private initApp(): void {
+    this.artistsService.getAllArtists();
   }
 }

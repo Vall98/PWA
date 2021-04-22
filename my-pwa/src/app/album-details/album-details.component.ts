@@ -12,18 +12,20 @@ import { Followed, UserService } from '../services/user.service';
 export class AlbumDetailsComponent implements OnInit {
 
   album: Album = new Album();
+  found: boolean = true;
 
   constructor(private route: ActivatedRoute, private soundsService: SoundsService, public artistsService: ArtistsService, public userService: UserService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      let id = Number(params['id']);
+      const id = Number(params['id']);
       this.soundsService.getAlbumById(id).subscribe((data) => {
         this.album = data;
-        if (this.album.added_by == undefined) {
-          this.album.added_by = 4;
-        }
-      })
+      }, (err) => {
+        this.album.picture = "https://blog.natro.com/wp-content/uploads/2019/12/404-hata-sayfasi.jpg";
+        this.album.title = "404";
+        this.found = false;
+      });
     });
   }
 }

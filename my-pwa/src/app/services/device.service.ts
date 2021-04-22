@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarRef, TextOnlySnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 export class DeviceService {
 
   token: String | undefined;
+  sbRef: MatSnackBarRef<TextOnlySnackBar> | undefined;
 
   constructor(private http: HttpClient, private router: Router, private userService: UserService, private snackBar: MatSnackBar) {
     if (localStorage.getItem('notification_active') == null) {
@@ -57,14 +58,19 @@ export class DeviceService {
   notificationClick(notification: Notification): void {
     console.log(notification);
     if (notification.data.route) {
-      this.router.navigateByUrl(notification.data.route);
+      this.router.navigateByUrl(notification.data.route).then((success) =>{
+        if (success && this.sbRef != undefined) this.sbRef.dismiss();
+      });
     }
   }
 
   notificationAlert(notification: Notification): void {
     console.log(notification);
-    const sbRef = this.snackBar.open(notification.title + ": " + notification.body, "Voir");
-    sbRef.onAction().subscribe(() => {
+    this.sbRef = this.snackBar.open(notification.title + ": " + notification.body, "Voir");
+    this.sbRef.afterDismissed().subscribe(() => {
+      this.sbRef = undefined;
+    })
+    this.sbRef.onAction().subscribe(() => {
       this.notificationClick(notification);
     });
   }
