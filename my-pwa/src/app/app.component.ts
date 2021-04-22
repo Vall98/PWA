@@ -31,11 +31,7 @@ export class AppComponent {
     swPush.notificationClicks.subscribe((click: any) => {
       console.log(click);
       console.log(click.data);
-      const notif: Notification = {
-        notification: click.notification,
-        data: click.data.FCM_MSG.data
-      }
-      this.deviceService.notificationClick(notif);
+      this.deviceService.notificationClick(click);
     });
 
     this.messaging = firebase.messaging();

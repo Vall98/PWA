@@ -7,21 +7,31 @@ firebase.initializeApp(firebaseConfig);
 
 const messaging = firebase.messaging();
 
-var test = {};
-
-messaging.onBackgroundMessage((payload) => {
-    console.log(payload);
-});
-
+//call only on "data messages", not on "notification messages", i.e., notification payload needs to be empty
 messaging.setBackgroundMessageHandler((payload) => {
     console.log(payload);
-    test = payload;
     const notificationOptions = {
         badge: 'assets/icons/icon-144x144.png',
-        body: payload.message.notification.body,
-        data: payload.message.data,
+        body: payload.data.body,
+        data: payload.data.data,
         icon: 'assets/icons/icon-512x512.png',
         image: 'assets/icons/icon-512x512.png'
     };
-    return self.registration.showNotification(payload.message.notification.title, notificationOptions);
+    return self.registration.showNotification(payload.data.title, notificationOptions);
+});
+
+self.addEventListener('notificationclick', event => {
+    const rootUrl = new URL('/', location).href;
+    event.notification.close();
+    // Enumerate windows, and call window.focus(), or open a new one.
+    event.waitUntil(
+      clients.matchAll().then(matchedClients => {
+        for (let client of matchedClients) {
+          if (client.url === rootUrl) {
+            return client.focus();
+          }
+        }
+        return clients.openWindow("/");
+      })
+    );
 });

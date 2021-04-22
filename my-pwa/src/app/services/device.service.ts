@@ -63,7 +63,7 @@ export class DeviceService {
 
   notificationAlert(notification: Notification): void {
     console.log(notification);
-    const sbRef = this.snackBar.open(notification.notification.title + ": " + notification.notification.body, "Voir");
+    const sbRef = this.snackBar.open(notification.title + ": " + notification.body, "Voir");
     sbRef.onAction().subscribe(() => {
       this.notificationClick(notification);
     });
@@ -71,6 +71,7 @@ export class DeviceService {
 }
 
 export interface Notification {
-  notification: { title: string, body: string };
+  title: string,
+  body: string,
   data: { route: string };
 }
