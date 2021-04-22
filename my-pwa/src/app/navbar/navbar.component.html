@@ -6,6 +6,7 @@
         <a class="logo-title">Free-sons</a>
       </button>
       <span class="spacer"></span>
+      <mat-icon *ngIf="!connectionService.online">wifi_off</mat-icon>
       <div *ngIf="userService.connected">
         <button mat-button [matMenuTriggerFor]="profile">
           <mat-icon>account_circle</mat-icon>
@@ -44,7 +45,7 @@
         </mat-menu>
       </div>
       <div *ngIf="!userService.connected">
-        <button *ngIf="connectionService.online" (click)="signin()" mat-menu-item>
+        <button mat-button *ngIf="connectionService.online" (click)="signin()">
           <mat-icon>account_circle</mat-icon>
           Connexion
         </button>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Artist, ArtistsService } from '../services/artists.service';
+import { ConnectionService } from '../services/connection.service';
 import { UserService, Followed } from '../services/user.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class ArtistDetailsComponent implements OnInit {
   artist404: Artist = new Artist();
   noFollow: boolean = false;
 
-  constructor(private route: ActivatedRoute, private artistsService: ArtistsService, public userService: UserService) {
+  constructor(private route: ActivatedRoute, private artistsService: ArtistsService, public userService: UserService, public connectionService: ConnectionService) {
     this.artist404.username = "404";
     this.artist404.profile_picture = "https://blog.natro.com/wp-content/uploads/2019/12/404-hata-sayfasi.jpg";
   }

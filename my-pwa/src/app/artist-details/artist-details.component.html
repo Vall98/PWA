@@ -4,8 +4,14 @@
         <div *ngIf="!noFollow" class="followers">
             {{ artist.followers}} followers
             <div *ngIf="userService.connected && artist.id != userService.user.id">
-                <button *ngIf="!isArtistFollowed()" mat-raised-button color="accent" (click)="follow()">Suivre</button>
-                <button *ngIf="isArtistFollowed()" mat-raised-button color="warn" (click)="unfollow()">Ne plus suivre</button>
+                <button *ngIf="!isArtistFollowed()" mat-raised-button color="accent" (click)="follow()" [disabled]="!connectionService.online">
+                    <mat-icon *ngIf="!connectionService.online">wifi_off</mat-icon>
+                    Suivre
+                </button>
+                <button *ngIf="isArtistFollowed()" mat-raised-button color="warn" (click)="unfollow()" [disabled]="!connectionService.online">
+                    <mat-icon *ngIf="!connectionService.online">wifi_off</mat-icon>
+                    Ne plus suivre
+                </button>
             </div>
         </div>
     </div>

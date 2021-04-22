@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, AfterContentChecked, ViewChild, ElementRe
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArtistsService } from '../services/artists.service';
+import { ConnectionService } from '../services/connection.service';
 import { Comment, SoundsService } from '../services/sounds.service';
 import { UserService } from '../services/user.service';
 
@@ -20,7 +21,7 @@ export class DetailsComponent implements OnInit, AfterContentChecked {
   submitting: boolean = false;
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder,
-    public userService: UserService, private soundsService: SoundsService, private artistsService: ArtistsService) {
+    public userService: UserService, private soundsService: SoundsService, private artistsService: ArtistsService, public connectionService: ConnectionService) {
     this.soundId = Number(this.route.snapshot.paramMap.get('id'));
     this.commentForm = this.formBuilder.group({
       comment: ['']
