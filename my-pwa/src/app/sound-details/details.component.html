@@ -8,7 +8,10 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Laisser un commentaire</mat-label>
                     <textarea matInput placeholder="Votre commentaire" formControlName="comment" required></textarea>
-                    <button mat-button color="accent" type="submit" [disabled]="!commentForm.valid || submitting" block>Poster</button>
+                    <button mat-button color="accent" type="submit" [disabled]="!commentForm.valid || submitting || !connectionService.online" block>
+                        <mat-icon *ngIf="!connectionService.online">wifi_off</mat-icon>
+                        Poster
+                    </button>
                 </mat-form-field>
             </div>
         </form>
