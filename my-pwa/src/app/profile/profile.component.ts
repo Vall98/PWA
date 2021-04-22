@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { ConnectionService } from '../services/connection.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class ProfileComponent implements OnInit {
   hideConfirm: boolean = true;
   formErr: any = {};
 
-  constructor(private formBuilder: FormBuilder, public userService : UserService) {
+  constructor(private formBuilder: FormBuilder, public userService : UserService, public connectionService: ConnectionService) {
     this.profileForm = this.formBuilder.group({
     username: ['', Validators.required],
     email: ['', Validators.email],

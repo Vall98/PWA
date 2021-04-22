@@ -1,6 +1,7 @@
 <mat-card *ngIf="userService.connected">
     <img class="img" [src]="img" (click)="fileInput.click()"/>
-    <button mat-button [disabled]="sendingImage || !img || img == userService.user.profile_picture" (click)="sendImage()">
+    <button mat-button [disabled]="sendingImage || !img || img == userService.user.profile_picture || !connectionService.online" (click)="sendImage()">
+        <mat-icon *ngIf="!connectionService.online">wifi_off</mat-icon>
         Mettre l'image a jour
         <mat-icon *ngIf="sendingImage"  style="margin-left: 10px;">
             <mat-spinner [diameter]="20"></mat-spinner>
@@ -55,7 +56,8 @@
                 <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
             </mat-form-field><br/>
-        <button mat-button color="accent" type="submit" [disabled]="!profileForm.valid || submitting">
+        <button mat-button color="accent" type="submit" [disabled]="!profileForm.valid || submitting || !connectionService.online">
+            <mat-icon *ngIf="!connectionService.online">wifi_off</mat-icon>
             Mettre les informations a jour
             <mat-icon *ngIf="submitting"  style="margin-left: 10px;">
                 <mat-spinner [diameter]="20"></mat-spinner>

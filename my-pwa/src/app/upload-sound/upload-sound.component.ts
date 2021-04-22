@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CreateAlbumComponent } from '../create-album/create-album.component';
+import { ConnectionService } from '../services/connection.service';
 import { Album, SoundsService, Style } from '../services/sounds.service';
 import { UserService } from '../services/user.service';
 
@@ -21,7 +22,8 @@ export class UploadSoundComponent implements OnInit {
   file: File | undefined;
   submitting: boolean = false;
 
-  constructor(private soundsService: SoundsService, private formBuilder: FormBuilder, public userService: UserService, public dialog: MatDialog, private router: Router) {
+  constructor(private soundsService: SoundsService, private formBuilder: FormBuilder, public userService: UserService,
+    public dialog: MatDialog, private router: Router, public connectionService: ConnectionService) {
     this.soundFormTitle = this.formBuilder.group({
       title: ['']
     });

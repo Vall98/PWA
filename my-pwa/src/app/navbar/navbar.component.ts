@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SigninComponent } from '../signin/signin.component';
-import { Router } from '@angular/router';
 import { DeviceService } from '../services/device.service';
+import { ConnectionService } from '../services/connection.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +14,7 @@ export class NavbarComponent {
 
   notifications: boolean;
 
-  constructor(public userService: UserService, public dialog: MatDialog, public deviceService: DeviceService) {
+  constructor(public userService: UserService, public dialog: MatDialog, public deviceService: DeviceService, public connectionService: ConnectionService) {
     this.notifications = this.deviceService.retrieveNotification();
   }
 
