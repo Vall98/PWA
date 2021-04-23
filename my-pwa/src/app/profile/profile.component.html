@@ -40,8 +40,8 @@
             <mat-error *ngIf="profileForm.controls.password?.errors?.custom">
                 {{formErr.password}}
             </mat-error>
-            <mat-label>Chnages le mot de passe</mat-label>
-            <input matInput placeholder="Mot de passe" formControlName="password" [type]="hidePassword ? 'password' : 'text'">
+            <mat-label>Changez le mot de passe</mat-label>
+            <input matInput autocomplete="new-password" placeholder="Mot de passe" formControlName="password" [type]="hidePassword ? 'password' : 'text'">
             <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword" [attr.aria-label]="'Cacher le mot de passe'" [attr.aria-pressed]="hidePassword">
                 <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
@@ -50,7 +50,7 @@
             <mat-error *ngIf="profileForm.hasError('notSame')">
                 Les mots de passe ne correspondent pas
             </mat-error>
-            <mat-label>Confirmer le mot de passe</mat-label>
+            <mat-label>Confirmez le mot de passe</mat-label>
             <input matInput placeholder="Confirmez le mot de passe" formControlName="confirmPassword" [type]="hideConfirm ? 'password' : 'text'" [errorStateMatcher]="matcher">
             <button mat-icon-button matSuffix type="button" (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Cacher le mot de passe'" [attr.aria-pressed]="hideConfirm">
                 <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
