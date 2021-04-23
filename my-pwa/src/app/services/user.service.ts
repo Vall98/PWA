@@ -29,14 +29,7 @@ export class UserService {
       this.http.get(url, httpOptions).subscribe((data: any) => {
         this.user = data;
         this.connected = true;
-        for (let sound of this.user.sounds) {
-          this.soundsService.getSoundById(sound.id);
-          this.http.get(sound.file + '');
-        }
-        for (let album of this.user.albums) {
-          this.soundsService.getAlbumById(album.id);
-          this.http.get(album.picture);
-        }
+        this.cacheMySounds();
         if (!this.user.profile_picture || this.user.profile_picture == "") {
           this.user.profile_picture = "https://ts3.wondercube.fr/images/default_profile.png";
         }
@@ -46,6 +39,18 @@ export class UserService {
         reject(err);
       });
     });
+  }
+
+  cacheMySounds() {
+    this.soundsService.token = this.token;
+    for (let sound of this.user.sounds) {
+      this.soundsService.getSoundById(sound.id);
+      this.http.get(sound.file + '');
+    }
+    for (let album of this.user.albums) {
+      this.soundsService.getAlbumById(album.id);
+      this.http.get(album.picture);
+    }
   }
 
   saveToken(token: string): void {

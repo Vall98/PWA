@@ -1,15 +1,34 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SoundsService {
 
-  constructor(private http: HttpClient, private userService: UserService) { }
+  token: String = "";
+
+  constructor(private http: HttpClient) { }
+
+  getUserAuthHeaderFileTransfer() {
+    return {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        Authorization: 'Bearer ' + this.token
+      })
+    };
+  }
+
+  getUserAuthHeader(): { headers: HttpHeaders; } {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/x-www-form-urlencoded',
+        Authorization: 'Bearer ' + this.token
+      })
+    };
+  }
 
   getSoundById(id: number): Observable<any>{
       const url = environment.api + 'sounds/' + id;
@@ -38,7 +57,7 @@ export class SoundsService {
     formData.append('style', '' + styleInput);
     formData.append('file', fileInput, fileInput.name);
     formData.append('album', '' + albumInput);
-    return this.http.post(url, formData, this.userService.getUserAuthHeaderFileTransfer());
+    return this.http.post(url, formData, this.getUserAuthHeaderFileTransfer());
   }
 
   postAlbum(titleInput: string, fileInput: File): Observable<any> {
@@ -46,13 +65,13 @@ export class SoundsService {
     let formData: FormData = new FormData();
     formData.append('title', titleInput);
     formData.append('picture', fileInput, fileInput.name);
-    return this.http.post(url, formData, this.userService.getUserAuthHeaderFileTransfer());
+    return this.http.post(url, formData, this.getUserAuthHeaderFileTransfer());
   }
 
   postComment(id: number, comment: string): Observable<any> {
     const url = environment.api + 'sounds/' + id + "/comment/ ";
     let body = "message=" + comment;
-    return this.http.post(url, body, this.userService.getUserAuthHeader());
+    return this.http.post(url, body, this.getUserAuthHeader());
   }
 }
 
