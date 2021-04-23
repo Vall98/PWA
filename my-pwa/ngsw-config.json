@@ -42,7 +42,7 @@
     {
       "name": "sounds",
       "urls": [
-        "/sounds/*/**"
+        "/sounds/*"
       ],
       "cacheConfig": {
         "maxSize": 100,
