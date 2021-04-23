@@ -43,13 +43,16 @@ export class UserService {
 
   cacheMySounds() {
     this.soundsService.token = this.token;
+    console.log("CACHE SOUND");
     for (let sound of this.user.sounds) {
-      this.soundsService.getSoundById(sound.id);
-      this.http.get(sound.file + '');
+      console.log(sound);
+      this.soundsService.getSoundById(sound.id).subscribe();
+      fetch(sound.file + '', { mode: 'no-cors' }).then();
     }
     for (let album of this.user.albums) {
-      this.soundsService.getAlbumById(album.id);
-      this.http.get(album.picture);
+      console.log(album);
+      this.soundsService.getAlbumById(album.id).subscribe();
+      fetch(album.picture, { mode: 'no-cors' }).then();
     }
   }
 
@@ -119,6 +122,7 @@ export class UserService {
     this.http.get(url, httpOptions).subscribe((data: any) => {
       this.user = data;
       this.connected = true;
+      this.cacheMySounds();
       if (!this.user.profile_picture || this.user.profile_picture == "") {
         this.user.profile_picture = "https://ts3.wondercube.fr/images/default_profile.png";
       }

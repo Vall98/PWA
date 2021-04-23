@@ -53,7 +53,6 @@ export class SignupComponent implements OnInit {
         this.deviceService.registerToken();
         this.dialogRef.close();
         this.submitting = false;
-        this.userService.cacheMySounds();
       });
     }, (err) => {
       this.formErr = err.error;

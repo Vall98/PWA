@@ -42,7 +42,6 @@ export class SigninComponent implements OnInit {
       this.deviceService.registerToken();
       this.dialogRef.close();
       this.submitting = false;
-      this.userService.cacheMySounds();
     }, (err) => {
       this.error = err.error.error_description;
       if (this.error = "Invalid credentials given.") {
