@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Album, Sound } from './sounds.service';
+import { Album, Sound, SoundsService } from './sounds.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class UserService {
   user: User = new User();
   token: String = "";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private soundsService: SoundsService) {
   }
 
   connectFromToken(): Promise<any> {
@@ -29,6 +29,14 @@ export class UserService {
       this.http.get(url, httpOptions).subscribe((data: any) => {
         this.user = data;
         this.connected = true;
+        for (let sound of this.user.sounds) {
+          this.soundsService.getSoundById(sound.id);
+          this.http.get(sound.file + '');
+        }
+        for (let album of this.user.albums) {
+          this.soundsService.getAlbumById(album.id);
+          this.http.get(album.picture);
+        }
         if (!this.user.profile_picture || this.user.profile_picture == "") {
           this.user.profile_picture = "https://ts3.wondercube.fr/images/default_profile.png";
         }
