@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CreateAlbumComponent } from '../create-album/create-album.component';
 import { ConnectionService } from '../services/connection.service';
@@ -23,7 +24,7 @@ export class UploadSoundComponent implements OnInit {
   submitting: boolean = false;
 
   constructor(private soundsService: SoundsService, private formBuilder: FormBuilder, public userService: UserService,
-    public dialog: MatDialog, private router: Router, public connectionService: ConnectionService) {
+    public dialog: MatDialog, private router: Router, public connectionService: ConnectionService, private snackBar: MatSnackBar) {
     this.soundFormTitle = this.formBuilder.group({
       title: ['']
     });
@@ -61,6 +62,7 @@ export class UploadSoundComponent implements OnInit {
       this.submitting = false;
       this.router.navigateByUrl("/");
     }, (err) => {
+      this.snackBar.open("Une erreur s'est produite", "Fermer", { duration: 2000 });
       this.submitting = false;
     });
   }

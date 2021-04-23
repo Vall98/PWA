@@ -31,21 +31,6 @@ export class SoundsService {
     return this.http.get(url);
   }
 
-/*  postLikeSound(id: number): void{
-    const url = environment.api + 'sounds/' + id + '/like/';
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/x-www-form-urlencoded',
-        Authorization: 'Bearer ' + this.userService.token
-      })
-    };
-    this.http.post(url, {id: id}, httpOptions).subscribe((data) => {
-
-    }, (err) => {
-      console.log(err);
-    });
-  }*/
-
   postSound(titleInput: string, styleInput: number, albumInput: number, fileInput: File): Observable<any> {
     const url = environment.api + 'sounds/';
     let formData: FormData = new FormData();
