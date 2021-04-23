@@ -1,5 +1,4 @@
-(global as any).WebSocket = require('ws');
-(global as any).XMLHttpRequest = require('xhr2');
+(global as any).self = { fetch: require('node-fetch') };
 import 'zone.js/dist/zone-node';
 
 import { ngExpressEngine } from '@nguniversal/express-engine';
