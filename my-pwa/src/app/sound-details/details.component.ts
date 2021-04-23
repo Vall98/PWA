@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterContentChecked, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArtistsService } from '../services/artists.service';
 import { ConnectionService } from '../services/connection.service';
@@ -20,8 +21,8 @@ export class DetailsComponent implements OnInit, AfterContentChecked {
   commentForm: FormGroup;
   submitting: boolean = false;
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder,
-    public userService: UserService, private soundsService: SoundsService, private artistsService: ArtistsService, public connectionService: ConnectionService) {
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, public userService: UserService, private snackBar: MatSnackBar,
+    private soundsService: SoundsService, private artistsService: ArtistsService, public connectionService: ConnectionService) {
     this.soundId = Number(this.route.snapshot.paramMap.get('id'));
     this.commentForm = this.formBuilder.group({
       comment: ['']
@@ -61,6 +62,7 @@ export class DetailsComponent implements OnInit, AfterContentChecked {
       this.comments.push(data);
       this.commentForm.setValue({comment: ""});
     }, (err) => {
+      this.snackBar.open("Une erreur s'est produite", "Fermer", { duration: 2000 });
       this.submitting = false;
     });
   }

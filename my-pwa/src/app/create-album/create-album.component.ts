@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConnectionService } from '../services/connection.service';
 import { SoundsService } from '../services/sounds.service';
 import { UserService } from '../services/user.service';
@@ -18,7 +19,7 @@ export class CreateAlbumComponent implements OnInit {
   submitting: boolean = false;
 
   constructor(private soundsService: SoundsService, private formBuilder: FormBuilder, private userService: UserService,
-    private dialogRef: MatDialogRef<CreateAlbumComponent>, public connectionService: ConnectionService) {
+    private dialogRef: MatDialogRef<CreateAlbumComponent>, public connectionService: ConnectionService, private snackBar: MatSnackBar) {
     this.albumForm = this.formBuilder.group({
       title: ['']
     });
@@ -53,6 +54,7 @@ export class CreateAlbumComponent implements OnInit {
       this.submitting = false;
       this.dialogRef.close();
     }, (err) => {
+      this.snackBar.open("Une erreur s'est produite", "Fermer", { duration: 2000 });
       this.submitting = false;
     });;
   }

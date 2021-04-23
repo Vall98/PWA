@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConnectionService } from '../services/connection.service';
 import { UserService } from '../services/user.service';
 
@@ -21,7 +22,7 @@ export class ProfileComponent implements OnInit {
   hideConfirm: boolean = true;
   formErr: any = {};
 
-  constructor(private formBuilder: FormBuilder, public userService : UserService, public connectionService: ConnectionService) {
+  constructor(private formBuilder: FormBuilder, public userService : UserService, public connectionService: ConnectionService, private snackBar: MatSnackBar) {
     this.profileForm = this.formBuilder.group({
     username: ['', Validators.required],
     email: ['', Validators.email],
@@ -85,6 +86,7 @@ export class ProfileComponent implements OnInit {
       this.img = data.picture;
       this.userService.user.profile_picture = data.picture;
     }, (err) => {
+      this.snackBar.open("Une erreur s'est produite", "Fermer", { duration: 2000 });
       this.sendingImage = false;
     });
   }

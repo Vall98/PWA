@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeviceService } from '../services/device.service';
 import { UserService } from '../services/user.service';
 import { SignupComponent } from '../signup/signup.component';
@@ -17,7 +18,8 @@ export class SigninComponent implements OnInit {
   hidePassword: boolean = true;
   error: String | undefined;
 
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<SigninComponent>, private userService: UserService, private deviceService: DeviceService) {
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private dialogRef: MatDialogRef<SigninComponent>,
+    private userService: UserService, private deviceService: DeviceService, private snackBar: MatSnackBar) {
     this.signinForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -44,6 +46,8 @@ export class SigninComponent implements OnInit {
       this.error = err.error.error_description;
       if (this.error = "Invalid credentials given.") {
         this.error = "Identifiant ou mot de passe incorrect."
+      } else {
+        this.snackBar.open("Une erreur s'est produite", "Fermer", { duration: 2000 });
       }
       this.submitting = false;
     });
