@@ -47,12 +47,10 @@ export class UserService {
     for (let sound of this.user.sounds) {
       console.log(sound);
       this.soundsService.getSoundById(sound.id).subscribe();
-      fetch(sound.file + '', { mode: 'no-cors' }).then();
     }
     for (let album of this.user.albums) {
       console.log(album);
       this.soundsService.getAlbumById(album.id).subscribe();
-      fetch(album.picture, { mode: 'no-cors' }).then();
     }
   }
 
